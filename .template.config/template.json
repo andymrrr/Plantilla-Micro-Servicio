@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json.schemastore.org/template",
+  "author": "Cristian Isaac Vargas G. & Andy Miguel Reyes R",
+  "classifications": ["web", "api", "aspnet"],
+  "identity": "Intranet.Service.Template",
+  "name": "IntranetMicroService Project Template",
+  "shortName": "intraser-template",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "IntranetServicesTemplate",
+  "defaultName": "IntranetServices",
+  "symbols": {
+    "UoWClassName": {
+      "type": "generated",
+      "generator": "join",
+      "parameters": {
+        "separator": "",
+        "parts": [
+          "I",
+          "name",
+          "UoW"
+        ]
+      },
+      "replaces": "__UoWClassName__",
+      "description": "Genera el nombre de la clase de Unidad de Trabajo segun el nombre del proyecto."
+    },
+    "RepositoryClassName": {
+      "type": "generated",
+      "generator": "join",
+      "parameters": {
+        "separator": "",
+        "parts": [
+          "Repository",
+          "name"
+        ]
+      },
+      "replaces": "__RepositoryClassName__",
+      "description": "Genera el nombre de la clase del repositorio en funcion del nombre del proyecto.."
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            "**/.git/**",
+            "**/bin/**",
+            "**/obj/**",
+            "**/.vs/**"
+          ]
+        }
+      ]
+    }
+  ]
+}
