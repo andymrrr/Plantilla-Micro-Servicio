@@ -74,8 +74,6 @@ namespace PlantillaMicroServicio.DAL.Core.Repositorios
             _context.Set<T>().Update(entidad);
 
         }
-
-
         public async Task<IQueryable<T>> BuscarAsincrono(Expression<Func<T, bool>> accion)
         {
             return _context.Set<T>().Where(accion);
