@@ -5,9 +5,9 @@ using PlantillaMicroServicio.DAL.Modelo;
 
 namespace Artes.Datos.Datos.Repositorios
 {
-    public class PlantillaMicroServicioUoW : IPlantillaMicroServicioUoW
+    public class PlantillaMicroServicioUoW : __UoWInterfaceName__
     {
-        private ContextPlantillaMicroServicio _context { get; }
+        private __DbContextClassName__ _context { get; }
 
         // Repositorios
         public IRepositorio<Ejemplo> Ejemplo { get;  set; }
@@ -15,7 +15,7 @@ namespace Artes.Datos.Datos.Repositorios
         
 
 
-        public PlantillaMicroServicioUoW(ContextPlantillaMicroServicio context)
+        public PlantillaMicroServicioUoW(__DbContextClassName__ context)
         {
             _context = context;
 

@@ -9,8 +9,8 @@ namespace PlantillaMicroServicio.DAL.Core.Repositorios
 {
     public class Repositorio<T>  : IRepositorio<T> where T : class
     {
-        protected readonly ContextPlantillaMicroServicio _context;
-        public Repositorio(ContextPlantillaMicroServicio context)
+        protected readonly __DbContextClassName__ _context;
+        public Repositorio(__DbContextClassName__ context)
         {
             _context = context;
         }

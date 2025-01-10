@@ -1,18 +1,18 @@
 {
   "$schema": "https://json.schemastore.org/template",
-  "author": "Cristian Isaac Vargas G. & Andy Miguel Reyes R",
+  "author": "Andy Miguel Reyes R",
   "classifications": ["web", "api", "aspnet"],
-  "identity": "Intranet.Service.Template",
-  "name": "IntranetMicroService Project Template",
+  "identity": "Plantilla-Microservicio.Template",
+  "name": "Plantilla-Microservicio Project Template",
   "shortName": "intraser-template",
   "tags": {
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "IntranetServicesTemplate",
+  "sourceName": "PlantillaMicroServicio",
   "defaultName": "IntranetServices",
   "symbols": {
-    "UoWClassName": {
+    "UoWInterfaceName": {
       "type": "generated",
       "generator": "join",
       "parameters": {
@@ -23,21 +23,34 @@
           "UoW"
         ]
       },
-      "replaces": "__UoWClassName__",
-      "description": "Genera el nombre de la clase de Unidad de Trabajo segun el nombre del proyecto."
+      "replaces": "__UoWInterfaceName__",
+      "description": "Genera el nombre de la interfaz de Unidad de Trabajo (Unit of Work)."
     },
-    "RepositoryClassName": {
+    "UoWClassName": {
       "type": "generated",
       "generator": "join",
       "parameters": {
         "separator": "",
         "parts": [
-          "Repository",
+          "name",
+          "UoW"
+        ]
+      },
+      "replaces": "__UoWClassName__",
+      "description": "Genera el nombre de la clase de Unidad de Trabajo (Unit of Work)."
+    },
+    "DbContextClassName": {
+      "type": "generated",
+      "generator": "join",
+      "parameters": {
+        "separator": "",
+        "parts": [
+          "Context",
           "name"
         ]
       },
-      "replaces": "__RepositoryClassName__",
-      "description": "Genera el nombre de la clase del repositorio en funcion del nombre del proyecto.."
+      "replaces": "__DbContextClassName__",
+      "description": "Genera el nombre de la clase de contexto de base de datos (DbContext)."
     }
   },
   "sources": [

@@ -2,7 +2,7 @@
 
 namespace PlantillaMicroServicio.DAL.Core.Interfaces
 {
-    public interface IPlantillaMicroServicioUoW
+    public interface __UoWInterfaceName__
     {
         IRepositorio<Ejemplo> Ejemplo { get; set; }
 

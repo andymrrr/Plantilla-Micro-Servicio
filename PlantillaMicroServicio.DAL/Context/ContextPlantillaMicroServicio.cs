@@ -4,11 +4,11 @@ using System.Reflection;
 
 namespace PlantillaMicroServicio.DAL.Context
 {
-    public class ContextPlantillaMicroServicio : DbContext
+    public class __DbContextClassName__ : DbContext
     {
         // TODO: Aqui define tus datasets
 
-        public ContextPlantillaMicroServicio(DbContextOptions<ContextPlantillaMicroServicio> options) : base(options){}
+        public __DbContextClassName__(DbContextOptions<__DbContextClassName__> options) : base(options){}
         public DbSet<Ejemplo> Ejemplos { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
