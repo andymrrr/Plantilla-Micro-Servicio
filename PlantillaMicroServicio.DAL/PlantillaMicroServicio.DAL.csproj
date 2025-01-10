@@ -6,7 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  
+	<ItemGroup>
+		<Compile Remove="EntitiesConfigurations\**" />
+		<Compile Remove="Entities\**" />
+		<EmbeddedResource Remove="EntitiesConfigurations\**" />
+		<EmbeddedResource Remove="Entities\**" />
+		<None Remove="EntitiesConfigurations\**" />
+		<None Remove="Entities\**" />
+	</ItemGroup>
 
 
 
@@ -20,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Core\Interfaces\" />
 	  <Folder Include="Core\Repositorios\" />
   </ItemGroup>
 
