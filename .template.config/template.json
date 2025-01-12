@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/template",
+  "author": "Andy Miguel Reyes R.",
+  "classifications": ["web", "api", "aspnet"],
+  "identity": "Plantilla.Microservicio.Template",
+  "name": "PlantillaMicroservicio",
+  "shortName": "micro-servicio",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "PlantillaMicroServicio",
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": ["**/.git/**", "**/bin/**", "**/obj/**", "**/.vs/**"]
+        }
+      ]
+    }
+  ]
+}
