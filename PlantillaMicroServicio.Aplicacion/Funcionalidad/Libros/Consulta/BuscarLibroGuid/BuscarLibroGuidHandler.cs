@@ -22,9 +22,10 @@ namespace PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Consulta.Buscar
         public Task<LibroVm> Handle(BuscarLibroGuidConsulta request, CancellationToken cancellationToken)
         {
             var datosFalso = new Faker<Libro>()
-           .RuleFor(e => e.Id, f => Guid.NewGuid())
-           .RuleFor(e => e.Nombre, f => f.Name.FirstName())
-           .RuleFor(e => e.Apellido, f => f.Name.LastName());
+                       .RuleFor(e => e.Id, f => Guid.NewGuid()) 
+                       .RuleFor(e => e.Titulo, f => f.Commerce.ProductName())
+                       .RuleFor(e => e.Editorial, f => f.Company.CompanyName()) 
+                       .RuleFor(e => e.Autor, f => f.Name.FullName());
 
             var datosFalsos = datosFalso.Generate(50);
             datosFalsos[0].Id = Guid.Empty;
@@ -37,7 +38,7 @@ namespace PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Consulta.Buscar
                 throw new KeyNotFoundException($"No se encontró un registro con el ID: {request.Guid}");
             }
 
-            var ejemploDto = _mapper.Map<EjemploDTO>(registro);
+            var ejemploDto = _mapper.Map<LibroVm>(registro);
 
 
             return Task.FromResult(ejemploDto);
