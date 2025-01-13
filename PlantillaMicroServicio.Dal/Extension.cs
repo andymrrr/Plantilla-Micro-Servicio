@@ -7,6 +7,7 @@ using PlantillaMicroServicio.Dal.Contexto;
 using PlantillaMicroServicio.Dal.Nucleo.Interfaces;
 using PlantillaMicroServicio.Dal.Nucleo.Repositorios;
 using PlantillaMicroServicio.Dal.Seguridad;
+using System;
 using System.Text;
 
 namespace PlantillaMicroServicio.Dal
@@ -17,11 +18,13 @@ namespace PlantillaMicroServicio.Dal
         {
             servicio.AddHttpContextAccessor();
             
-            servicio.AddDbContext<ContextPlantillaMicroServicio>(options =>
-                options.UseSqlServer(configuracion.GetConnectionString("PlantillaMicroServicio"),
-                    sqlOptions => sqlOptions.MigrationsAssembly(typeof(ContextPlantillaMicroServicio).Assembly.FullName)));
-
+            //servicio.AddDbContext<ContextPlantillaMicroServicio>(options =>
+            //    options.UseSqlServer(configuracion.GetConnectionString("PlantillaMicroServicio"),
+            //        sqlOptions => sqlOptions.MigrationsAssembly(typeof(ContextPlantillaMicroServicio).Assembly.FullName)));
             
+            servicio.AddDbContext<ContextPlantillaMicroServicio>(options =>
+                    options.UseInMemoryDatabase("PlantillaMicroServicio"));
+
             servicio.AddScoped<IPlantillaMicroServicioUoW, PlantillaMicroServicioUoW>();
 
             servicio.AddScoped(typeof(IRepositorio<>), typeof(Repositorio<>));

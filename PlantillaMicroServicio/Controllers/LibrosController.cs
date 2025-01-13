@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Comando.InicializarLibros;
 using PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Consulta.BuscarLibroGuid;
 using PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Consulta.BuscarLibroPaginacion;
 using PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Vm;
@@ -35,7 +36,16 @@ namespace PlantillaMicroServicio.Controllers
             return Ok(paginacion);
         }
 
+        [HttpGet("InicializarLibro", Name = "InicializarLibro")]
+        [ProducesResponseType(typeof(bool), (int)(HttpStatusCode.OK))]
+        public async Task<ActionResult<bool>> InicializarLibro()
+        {
+            var consulta = new InicializarLibrosComando();
+            return await _mediador.Send(consulta);
+        }
+
+
 
     }
-  
+
 }
