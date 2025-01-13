@@ -16,15 +16,14 @@ namespace PlantillaMicroServicio.Dal
         public static IServiceCollection AddServicioDatos(this IServiceCollection servicio, IConfiguration configuracion)
         {
             servicio.AddHttpContextAccessor();
-            // Registrar el contexto de base de datos como scoped
+            
             servicio.AddDbContext<ContextPlantillaMicroServicio>(options =>
-                options.UseSqlServer(configuracion.GetConnectionString("Artes"),
+                options.UseSqlServer(configuracion.GetConnectionString("PlantillaMicroServicio"),
                     sqlOptions => sqlOptions.MigrationsAssembly(typeof(ContextPlantillaMicroServicio).Assembly.FullName)));
 
-            // Registrar la unidad de trabajo como scoped
+            
             servicio.AddScoped<IPlantillaMicroServicioUoW, PlantillaMicroServicioUoW>();
 
-            // Registrar el repositorio genérico como scoped
             servicio.AddScoped(typeof(IRepositorio<>), typeof(Repositorio<>));
             servicio.AddScoped<IAutenticacion, Autenticacion>();
 
@@ -42,6 +41,16 @@ namespace PlantillaMicroServicio.Dal
             });
 
             return servicio;
+        }
+        public static IServiceCollection AddCors(this IServiceCollection servicios, IConfiguration configuracion)
+        {
+            servicios.AddCors(opcion =>
+            {
+                opcion.AddPolicy("CorsPoolicy", constructor => constructor.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+            });
+            return servicios;
         }
     }
 }

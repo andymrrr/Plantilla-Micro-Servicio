@@ -1,12 +1,11 @@
-﻿namespace PlantillaMicroServicio.Modelos
+﻿
+
+namespace PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Vm
 {
-    public class Libro
+    public class LibroVm
     {
-        public Guid Id { get; set; }
         public string Titulo { get; set; }
         public string Editorial { get; set; }
         public string Autor { get; set; }
-
-
     }
 }
