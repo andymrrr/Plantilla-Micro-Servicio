@@ -25,10 +25,10 @@ namespace PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Comando.Inicial
                       .RuleFor(l => l.Editorial, f => f.Company.CompanyName())
                       .RuleFor(l => l.FechaPublicacion, f => f.Date.Past(10));
 
-            // Generar una lista de 100 libros
+           
             var libros = faker.Generate(100);
 
-            // Insertar datos en la base de datos
+           
             _context.Libros.AgregarColeccion(libros);
             await _context.GuardarCambiosAsync();
             return true;

@@ -24,8 +24,10 @@ namespace PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Consulta.Buscar
             var datosFalso = new Faker<Libro>()
                        .RuleFor(e => e.Id, f => Guid.NewGuid()) 
                        .RuleFor(e => e.Titulo, f => f.Commerce.ProductName())
-                       .RuleFor(e => e.Editorial, f => f.Company.CompanyName()) 
+                       .RuleFor(e => e.Editorial, f => f.Company.CompanyName())
+                       .RuleFor(l => l.FechaPublicacion, f => f.Date.Past(10))
                        .RuleFor(e => e.Autor, f => f.Name.FullName());
+
 
             var datosFalsos = datosFalso.Generate(50);
             datosFalsos[0].Id = Guid.Empty;
