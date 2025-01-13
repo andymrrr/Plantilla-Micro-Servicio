@@ -8,7 +8,7 @@ namespace PlantillaMicroServicio.Aplicacion
 {
     public static class Extension
     {
-        public static void AddNegocio(this IServiceCollection servicio, IConfiguration config)
+        public static void AddServicioAplicacion(this IServiceCollection servicio, IConfiguration config)
         {
             servicio.AddMediatR(opcion => opcion.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
             var cofiguracionMapeo = new MapperConfiguration(mc =>

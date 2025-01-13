@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PlantillaMicroServicio.Dal\PlantillaMicroServicio.Dal.csproj" />
+    <ProjectReference Include="..\PlantillaMicroServicio.Aplicacion\PlantillaMicroServicio.Aplicacion.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,3 +1,4 @@
+using PlantillaMicroServicio.Aplicacion;
 using PlantillaMicroServicio.Dal;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddServicioDatos(builder.Configuration);
+builder.Services.AddServicioAplicacion(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
