@@ -277,3 +277,7 @@ __pycache__/
 /.vs
 /.vs
 *.v2
+.vs/PlantillaMicroServicio/DesignTimeBuild/.dtbcache.v2
+*.v2
+.vs/ProjectEvaluation/plantillamicroservicio.projects.v7.bin
+.vs/ProjectEvaluation/plantillamicroservicio.metadata.v7.bin
