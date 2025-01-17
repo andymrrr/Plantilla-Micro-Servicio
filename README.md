@@ -1,7 +1,7 @@
 # Plantilla de Microservicio - Clean Architecture
 
 ## Descripción
-Esta plantilla está diseñada para construir microservicios en .NET siguiendo los principios de **Clean Architecture**. La estructura del proyecto promueve la separación de responsabilidades, la mantenibilidad y el escalado, al mismo tiempo que implementa el patrón **CQRS** (Command Query Responsibility Segregation).
+Esta plantilla está diseñada para construir microservicios en .NET siguiendo los principios de **Clean Architecture**. La estructura del proyecto promueve la separación de responsabilidades, la mantenibilidad y el escalado, al mismo tiempo que implementa el patrón **CQRS** (Command Query Responsibility Segregation). orientada a entity
 
 ## Características
 - **Arquitectura modular y desacoplada** basada en Clean Architecture:
