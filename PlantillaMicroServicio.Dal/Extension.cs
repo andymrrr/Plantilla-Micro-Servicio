@@ -4,9 +4,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using PlantillaMicroServicio.Dal.Contexto;
+using PlantillaMicroServicio.Dal.Modelos;
+using PlantillaMicroServicio.Dal.Modelos.Seguridad;
 using PlantillaMicroServicio.Dal.Nucleo.Interfaces;
 using PlantillaMicroServicio.Dal.Nucleo.Repositorios;
-using PlantillaMicroServicio.Dal.Seguridad;
+using PlantillaMicroServicio.Dal.Nucleo.Servicio.Interfaz;
+using PlantillaMicroServicio.Dal.Nucleo.Servicio.Repositorio;
 using System;
 using System.Text;
 
@@ -29,8 +32,9 @@ namespace PlantillaMicroServicio.Dal
 
             servicio.AddScoped(typeof(IRepositorio<>), typeof(Repositorio<>));
             servicio.AddScoped<IAutenticacion, Autenticacion>();
-
+            servicio.AddSingleton<IServicioCache, ServicioCache>();
             servicio.Configure<ConfiguracionJWT>(configuracion.GetSection("ConfiguracionJwt"));
+            servicio.Configure<ConfiguracionCache>(configuracion.GetSection("ConfiguracionCache"));
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuracion["ConfiguracionJwt:Llave"]!));
             servicio.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opcion =>
             {

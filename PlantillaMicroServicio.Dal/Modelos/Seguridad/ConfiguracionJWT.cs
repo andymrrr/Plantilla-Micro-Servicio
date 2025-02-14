@@ -1,6 +1,4 @@
-﻿
-
-namespace PlantillaMicroServicio.Dal.Seguridad
+﻿namespace PlantillaMicroServicio.Dal.Modelos.Seguridad
 {
     public class ConfiguracionJWT
     {
