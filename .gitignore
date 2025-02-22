@@ -281,3 +281,6 @@ __pycache__/
 *.v2
 .vs/ProjectEvaluation/plantillamicroservicio.projects.v7.bin
 .vs/ProjectEvaluation/plantillamicroservicio.metadata.v7.bin
+/PlantillaMicroServicio/logs
+/.vs
+/.vs
