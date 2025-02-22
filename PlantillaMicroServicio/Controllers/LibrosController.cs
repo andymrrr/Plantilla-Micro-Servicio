@@ -12,6 +12,7 @@ namespace PlantillaMicroServicio.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ServiceFilter(typeof(FiltroRegistroSolicitudes))]
     public class LibrosController : ControllerBase
     {
         private readonly IMediator _mediador;

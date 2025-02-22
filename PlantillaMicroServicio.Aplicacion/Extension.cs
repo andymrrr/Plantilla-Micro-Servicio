@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PlantillaMicroServicio.Aplicacion.Mapeo;
+using PlantillaMicroServicio.Aplicacion.Servicios.Implementacion;
+using PlantillaMicroServicio.Aplicacion.Servicios.Interfaz;
 using System.Reflection;
 
 namespace PlantillaMicroServicio.Aplicacion
@@ -10,7 +12,19 @@ namespace PlantillaMicroServicio.Aplicacion
     {
         public static void AddServicioAplicacion(this IServiceCollection servicio, IConfiguration config)
         {
+            servicio.AddMemoryCache();
+            servicio.AddSingleton<ICacheService, CacheService>();
+            servicio.AddMediatr();
+            servicio.AddAutoMapper();
+        }
+
+        private static void AddMediatr(this IServiceCollection servicio)
+        {
             servicio.AddMediatR(opcion => opcion.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+        }
+
+        private static void AddAutoMapper(this IServiceCollection servicio)
+        {
             var cofiguracionMapeo = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MapeoPerfil());

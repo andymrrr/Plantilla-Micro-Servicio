@@ -1,8 +1,8 @@
 ﻿
 
-namespace PlantillaMicroServicio.Dal.Nucleo.Servicio.Interfaz
+namespace PlantillaMicroServicio.Aplicacion.Servicios.Interfaz
 {
-    public interface IServicioCache
+    public interface ICacheService
     {
         Task<T?> ObtenerAsync<T>(string clave) where T : class;
         Task GuardarAsync<T>(string clave, T valor, TimeSpan? expiracion = null);

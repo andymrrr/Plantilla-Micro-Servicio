@@ -1,17 +1,17 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using PlantillaMicroServicio.Dal.Modelos;
-using PlantillaMicroServicio.Dal.Nucleo.Servicio.Interfaz;
+using PlantillaMicroServicio.Aplicacion.Servicios.Interfaz;
 
-namespace PlantillaMicroServicio.Dal.Nucleo.Servicio.Repositorio
+namespace PlantillaMicroServicio.Aplicacion.Servicios.Implementacion
 {
-    public class ServicioCache : IServicioCache
+    public class CacheService : ICacheService
     {
         private readonly IMemoryCache _cache;
         private readonly TimeSpan _expiracionPorDefecto;
        
 
-        public ServicioCache(IMemoryCache cache, IOptions<ConfiguracionCache> opciones)
+        public CacheService(IMemoryCache cache, IOptions<ConfiguracionCache> opciones)
         {
             _cache = cache;
             _expiracionPorDefecto = TimeSpan.FromSeconds(opciones.Value.TiempoExpiracion > 0

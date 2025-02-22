@@ -1,9 +1,11 @@
 using PlantillaMicroServicio.Aplicacion;
 using PlantillaMicroServicio.Dal;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Agregar configuración de logging
+ConfiguracionLogger.AgregarLogging(builder);
 
 builder.Services.AddControllers();
 
@@ -22,7 +24,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
-
+app.UseSerilogRequestLogging();
 app.MapControllers();
 
 app.Run();
