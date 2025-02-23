@@ -4,10 +4,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using PlantillaMicroServicio.Dal.Contexto;
+using PlantillaMicroServicio.Dal.Enums;
 using PlantillaMicroServicio.Dal.Modelos;
 using PlantillaMicroServicio.Dal.Modelos.Seguridad;
 using PlantillaMicroServicio.Dal.Nucleo.Interfaces;
 using PlantillaMicroServicio.Dal.Nucleo.Repositorios;
+using PlantillaMicroServicio.Dal.Proveedor;
 using System.Text;
 
 namespace PlantillaMicroServicio.Dal
@@ -17,21 +19,46 @@ namespace PlantillaMicroServicio.Dal
         public static IServiceCollection AddServicioDatos(this IServiceCollection servicio, IConfiguration configuracion)
         {
             servicio.AddHttpContextAccessor();
-            
-            //servicio.AddDbContext<ContextPlantillaMicroServicio>(options =>
-            //    options.UseSqlServer(configuracion.GetConnectionString("PlantillaMicroServicio"),
-            //        sqlOptions => sqlOptions.MigrationsAssembly(typeof(ContextPlantillaMicroServicio).Assembly.FullName)));
-            
-            servicio.AddDbContext<ContextPlantillaMicroServicio>(options =>
-                    options.UseInMemoryDatabase("PlantillaMicroServicio"));
+            servicio.AddJWT(configuracion);
+
+            var dbProvider = configuracion["DatabaseProvider"] ?? Proveedor.sqlserver;
+
+            switch (dbProvider.ToLower())
+            {
+                case Proveedor.sqlserver:
+                    servicio.AddSQL(configuracion);
+                    break;
+                case Proveedor.postgres:
+                    servicio.AddPostgres(configuracion);
+                    break;
+                default:
+                    throw new InvalidOperationException($"Proveedor de base de datos no soportado: {dbProvider}");
+            }
 
             servicio.AddScoped<IPlantillaMicroServicioUoW, PlantillaMicroServicioUoW>();
-
             servicio.AddScoped(typeof(IRepositorio<>), typeof(Repositorio<>));
             servicio.AddScoped<IAutenticacion, Autenticacion>();
-            
+
+            return servicio;
+        }
+
+        private static void AddSQL(this IServiceCollection servicio, IConfiguration configuracion)
+        {
+            servicio.AddDbContext<ContextPlantillaMicroServicio>(options =>
+                options.UseSqlServer(configuracion.GetConnectionString("PlantillaMicroServicio"),
+                    sqlOptions => sqlOptions.MigrationsAssembly(typeof(ContextPlantillaMicroServicio).Assembly.FullName)));
+        }
+
+        private static void AddPostgres(this IServiceCollection servicio, IConfiguration configuracion)
+        {
+            servicio.AddDbContext<ContextPlantillaMicroServicio>(options =>
+                options.UseNpgsql(configuracion.GetConnectionString("PlantillaMicroServicio"),
+                    sqlOptions => sqlOptions.MigrationsAssembly(typeof(ContextPlantillaMicroServicio).Assembly.FullName)));
+        }
+
+        private static void AddJWT(this IServiceCollection servicio, IConfiguration configuracion)
+        {
             servicio.Configure<ConfiguracionJWT>(configuracion.GetSection("ConfiguracionJwt"));
-            servicio.Configure<ConfiguracionCache>(configuracion.GetSection("ConfiguracionCache"));
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuracion["ConfiguracionJwt:Llave"]!));
             servicio.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opcion =>
             {
@@ -43,10 +70,8 @@ namespace PlantillaMicroServicio.Dal
                     ValidateIssuer = false
                 };
             });
-
-            return servicio;
         }
-        public static IServiceCollection AddCors(this IServiceCollection servicios, IConfiguration configuracion)
+        public static void  AddCors(this IServiceCollection servicios, IConfiguration configuracion)
         {
             servicios.AddCors(opcion =>
             {
@@ -54,7 +79,6 @@ namespace PlantillaMicroServicio.Dal
                 .AllowAnyMethod()
                 .AllowAnyHeader());
             });
-            return servicios;
         }
     }
 }
