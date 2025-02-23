@@ -5,11 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using PlantillaMicroServicio.Dal.Contexto;
 using PlantillaMicroServicio.Dal.Enums;
-using PlantillaMicroServicio.Dal.Modelos;
 using PlantillaMicroServicio.Dal.Modelos.Seguridad;
 using PlantillaMicroServicio.Dal.Nucleo.Interfaces;
 using PlantillaMicroServicio.Dal.Nucleo.Repositorios;
-using PlantillaMicroServicio.Dal.Proveedor;
 using System.Text;
 
 namespace PlantillaMicroServicio.Dal
