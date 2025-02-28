@@ -1,4 +1,5 @@
 using PlantillaMicroServicio.Aplicacion;
+using PlantillaMicroServicio.Aplicacion.Middleware;
 using PlantillaMicroServicio.Dal;
 using Serilog;
 
@@ -26,5 +27,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 app.UseSerilogRequestLogging();
 app.MapControllers();
+app.UseMiddleware<ValidationExceptionMiddleware>();
 
 app.Run();

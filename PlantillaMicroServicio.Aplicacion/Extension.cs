@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PlantillaMicroServicio.Aplicacion.Mapeo;
+using PlantillaMicroServicio.Aplicacion.Middleware;
 using PlantillaMicroServicio.Aplicacion.Servicios.Implementacion;
 using PlantillaMicroServicio.Aplicacion.Servicios.Interfaz;
 using System.Reflection;
@@ -14,6 +17,7 @@ namespace PlantillaMicroServicio.Aplicacion
         {
             servicio.AddMemoryCache();
             servicio.AddSingleton<ICacheService, CacheService>();
+            servicio.AddConfigFluentValidation();
             servicio.AddMediatr();
             servicio.AddAutoMapper();
         }
@@ -31,6 +35,11 @@ namespace PlantillaMicroServicio.Aplicacion
             });
             IMapper mapeo = cofiguracionMapeo.CreateMapper();
             servicio.AddSingleton(mapeo);
+        }
+        public static void AddConfigFluentValidation(this IServiceCollection services)
+        {
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         }
     }
 

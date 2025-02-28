@@ -1,13 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
-using System.Linq;
 using System.Reflection;
 
 namespace PlantillaMicroServicio.Aplicacion.Servicios.Utilitario
 {
-   
-
     public class ExclusionPropiedadesLog : DefaultContractResolver
     {
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
