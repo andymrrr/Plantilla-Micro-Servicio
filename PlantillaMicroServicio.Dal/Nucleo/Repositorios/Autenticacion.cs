@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using PlantillaMicroServicio.Dal.Modelos.Seguridad;
 using PlantillaMicroServicio.Dal.Nucleo.Interfaces;
 using PlantillaMicroServicio.Modelos;
+using PlantillaMicroServicio.Modelos.Configuracion;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;

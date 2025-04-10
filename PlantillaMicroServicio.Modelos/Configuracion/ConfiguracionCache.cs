@@ -1,6 +1,6 @@
 ﻿
 
-namespace PlantillaMicroServicio.Dal.Modelos
+namespace PlantillaMicroServicio.Modelos.Configuracion
 {
     public class ConfiguracionCache
     {

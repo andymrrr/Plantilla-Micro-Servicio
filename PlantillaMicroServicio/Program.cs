@@ -1,16 +1,25 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using PlantillaMicroServicio.Aplicacion;
-using PlantillaMicroServicio.Aplicacion.Middleware;
 using PlantillaMicroServicio.Dal;
+using PlantillaMicroServicio.Middleware;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Agregar configuración de logging
+
 ConfiguracionLogger.AgregarLogging(builder);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(opcion =>
+{
+    var politica = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    opcion.Filters.Add(new AuthorizeFilter(politica));
+}).AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+});
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddServicioDatos(builder.Configuration);

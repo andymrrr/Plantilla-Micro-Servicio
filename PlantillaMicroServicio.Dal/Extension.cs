@@ -4,10 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using PlantillaMicroServicio.Dal.Contexto;
-using PlantillaMicroServicio.Dal.Enums;
-using PlantillaMicroServicio.Dal.Modelos.Seguridad;
 using PlantillaMicroServicio.Dal.Nucleo.Interfaces;
 using PlantillaMicroServicio.Dal.Nucleo.Repositorios;
+using PlantillaMicroServicio.Modelos.Configuracion;
 using System.Text;
 
 namespace PlantillaMicroServicio.Dal
@@ -18,21 +17,8 @@ namespace PlantillaMicroServicio.Dal
         {
             servicio.AddHttpContextAccessor();
             servicio.AddJWT(configuracion);
-
-            var dbProvider = configuracion["DatabaseProvider"] ?? Proveedor.sqlserver;
-
-            switch (dbProvider.ToLower())
-            {
-                case Proveedor.sqlserver:
-                    servicio.AddSQL(configuracion);
-                    break;
-                case Proveedor.postgres:
-                    servicio.AddPostgres(configuracion);
-                    break;
-                default:
-                    throw new InvalidOperationException($"Proveedor de base de datos no soportado: {dbProvider}");
-            }
-
+            servicio.AddSQL(configuracion);
+                
             servicio.AddScoped<IPlantillaMicroServicioUoW, PlantillaMicroServicioUoW>();
             servicio.AddScoped(typeof(IRepositorio<>), typeof(Repositorio<>));
             servicio.AddScoped<IAutenticacion, Autenticacion>();

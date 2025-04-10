@@ -2,7 +2,7 @@
 
 using MediatR;
 
-namespace PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Comando.InicializarLibros
+namespace PlantillaMicroServicio.Aplicacion.Feature.Libros.Comando.InicializarLibros
 {
     public class InicializarLibrosComando : IRequest<bool>
     {

@@ -1,9 +1,8 @@
 ﻿using FluentValidation;
-using Microsoft.AspNetCore.Http;
 using System.Text.Json;
 
 
-namespace PlantillaMicroServicio.Aplicacion.Middleware
+namespace PlantillaMicroServicio.Middleware
 {
     public class ValidationExceptionMiddleware
     {

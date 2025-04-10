@@ -9,29 +9,8 @@
     "language": "C#",
     "type": "project"
   },
-  "symbols": {
-    "database": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        { "choice": "sqlserver", "description": "Usar SQL Server" },
-        { "choice": "postgres", "description": "Usar PostgreSQL" }
-      ],
-      "defaultValue": "sqlserver",
-      "description": "Elige la base de datos a utilizar"
-    }
-  },
-  "generatedSymbols": {
-    "connectionString": {
-      "type": "generated",
-      "generator": "evaluate",
-      "parameters": {
-        "expression": "'{0}' == 'postgres' ? 'Host=localhost;Database=mi_bd;Username=usuario;Password=clave' : 'Server=localhost;Database=mi_bd;User Id=usuario;Password=clave'",
-        "arguments": ["database"]
-      }
-    }
-  },
   "sourceName": "PlantillaMicroServicio",
+  "description": "Plantilla para los Servicios API",
   "sources": [
     {
       "modifiers": [
