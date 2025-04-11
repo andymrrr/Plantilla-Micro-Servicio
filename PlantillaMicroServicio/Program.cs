@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using PlantillaMicroServicio.Aplicacion;
 using PlantillaMicroServicio.Dal;
-using PlantillaMicroServicio.Middleware;
 using Serilog;
+using ServicioJobs.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
