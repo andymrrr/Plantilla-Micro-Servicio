@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PlantillaMicroServicio.Modelos\PlantillaMicroServicio.Modelos.csproj" />
+    <ProjectReference Include="..\PlantillaMicroServicio.Models\PlantillaMicroServicio.Models.csproj" />
   </ItemGroup>
 
 </Project>

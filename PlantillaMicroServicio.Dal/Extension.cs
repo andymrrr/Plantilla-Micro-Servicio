@@ -7,7 +7,7 @@ using PlantillaMicroServicio.Core.Repositorios;
 using PlantillaMicroServicio.Dal.Contexto;
 using PlantillaMicroServicio.Dal.Core.Interfaces;
 using PlantillaMicroServicio.Dal.Core.Repositorios;
-using PlantillaMicroServicio.Modelos.Configuracion;
+using PlantillaMicroServicio.Models.Configuracion;
 using System.Text;
 
 namespace PlantillaMicroServicio.Dal

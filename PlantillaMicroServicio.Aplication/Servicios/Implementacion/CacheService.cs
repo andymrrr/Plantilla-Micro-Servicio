@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using PlantillaMicroServicio.Aplication.Servicios.Interfaz;
-using PlantillaMicroServicio.Modelos.Configuracion;
+using PlantillaMicroServicio.Models.Configuracion;
 
 namespace PlantillaMicroServicio.Aplication.Servicios.Implementacion
 {

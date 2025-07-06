@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PlantillaMicroServicio.Dal\PlantillaMicroServicio.Dal.csproj" />
-    <ProjectReference Include="..\PlantillaMicroServicio.Modelos\PlantillaMicroServicio.Modelos.csproj" />
+    <ProjectReference Include="..\PlantillaMicroServicio.Models\PlantillaMicroServicio.Models.csproj" />
   </ItemGroup>
 
 </Project>

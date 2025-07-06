@@ -1,5 +1,5 @@
 ﻿using PlantillaMicroServicio.Dal.Core.Paginacion;
-using PlantillaMicroServicio.Modelos;
+using PlantillaMicroServicio.Models;
 
 namespace PlantillaMicroServicio.Aplication.Paginacion.Libros
 {

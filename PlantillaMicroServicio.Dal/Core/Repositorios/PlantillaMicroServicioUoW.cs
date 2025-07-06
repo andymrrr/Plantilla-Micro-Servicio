@@ -1,7 +1,7 @@
 ﻿using PlantillaMicroServicio.Core.Repositorios;
 using PlantillaMicroServicio.Dal.Contexto;
 using PlantillaMicroServicio.Dal.Core.Interfaces;
-using PlantillaMicroServicio.Modelos;
+using PlantillaMicroServicio.Models;
 
 namespace PlantillaMicroServicio.Dal.Core.Repositorios
 {

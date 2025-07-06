@@ -1,4 +1,4 @@
-﻿namespace PlantillaMicroServicio.Modelos.Configuracion
+﻿namespace PlantillaMicroServicio.Models.Configuracion
 {
     public class ConfiguracionJWT
     {

@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using PlantillaMicroServicio.Dal.Core.Interfaces;
-using PlantillaMicroServicio.Modelos;
-using PlantillaMicroServicio.Modelos.Configuracion;
+using PlantillaMicroServicio.Models;
+using PlantillaMicroServicio.Models.Configuracion;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;

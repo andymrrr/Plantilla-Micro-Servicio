@@ -1,4 +1,4 @@
-﻿using PlantillaMicroServicio.Modelos;
+﻿using PlantillaMicroServicio.Models;
 
 
 namespace PlantillaMicroServicio.Dal.Core.Interfaces

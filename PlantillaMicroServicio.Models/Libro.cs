@@ -1,4 +1,4 @@
-﻿namespace PlantillaMicroServicio.Modelos
+﻿namespace PlantillaMicroServicio.Models
 {
     public class Libro
     {

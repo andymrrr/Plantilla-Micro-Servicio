@@ -2,7 +2,7 @@
 using Bogus;
 using MediatR;
 using PlantillaMicroServicio.Aplication.Feature.Libros.Vm;
-using PlantillaMicroServicio.Modelos;
+using PlantillaMicroServicio.Models;
 
 namespace PlantillaMicroServicio.Aplication.Feature.Libros.Consulta.BuscarLibroGuid
 {

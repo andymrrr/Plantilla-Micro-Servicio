@@ -2,7 +2,7 @@
 
 using AutoMapper;
 using PlantillaMicroServicio.Aplication.Feature.Libros.Vm;
-using PlantillaMicroServicio.Modelos;
+using PlantillaMicroServicio.Models;
 
 namespace PlantillaMicroServicio.Aplication.Mapeo
 {
