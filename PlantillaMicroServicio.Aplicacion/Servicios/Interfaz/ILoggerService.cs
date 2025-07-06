@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PlantillaMicroServicio.Aplicacion.Servicios.Interfaz
+﻿namespace PlantillaMicroServicio.Aplication.Servicios.Interfaz
 {
     public interface ILoggerService
     {

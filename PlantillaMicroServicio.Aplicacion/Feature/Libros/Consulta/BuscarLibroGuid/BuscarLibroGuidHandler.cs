@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
 using Bogus;
 using MediatR;
-using PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Vm;
+using PlantillaMicroServicio.Aplication.Feature.Libros.Vm;
 using PlantillaMicroServicio.Modelos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PlantillaMicroServicio.Aplicacion.Feature.Libros.Consulta.BuscarLibroGuid
+namespace PlantillaMicroServicio.Aplication.Feature.Libros.Consulta.BuscarLibroGuid
 {
     internal class BuscarLibroGuidHandler : IRequestHandler<BuscarLibroGuidConsulta, LibroVm>
     {

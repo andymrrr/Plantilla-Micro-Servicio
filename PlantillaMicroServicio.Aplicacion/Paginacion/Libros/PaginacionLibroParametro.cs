@@ -2,7 +2,7 @@
 using PlantillaMicroServicio.Modelos;
 using System.Linq.Expressions;
 
-namespace PlantillaMicroServicio.Aplicacion.Paginacion.Libros
+namespace PlantillaMicroServicio.Aplication.Paginacion.Libros
 {
     public class PaginacionLibroParametro : PaginacionParametro
     {

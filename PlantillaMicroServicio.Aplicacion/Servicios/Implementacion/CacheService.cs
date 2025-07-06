@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
-using PlantillaMicroServicio.Aplicacion.Servicios.Interfaz;
+using PlantillaMicroServicio.Aplication.Servicios.Interfaz;
 using PlantillaMicroServicio.Modelos.Configuracion;
 
-namespace PlantillaMicroServicio.Aplicacion.Servicios.Implementacion
+namespace PlantillaMicroServicio.Aplication.Servicios.Implementacion
 {
     public class CacheService : ICacheService
     {

@@ -1,12 +1,12 @@
 ﻿
 using Microsoft.Extensions.Configuration;
-using PlantillaMicroServicio.Aplicacion.Servicios.Interfaz;
+using PlantillaMicroServicio.Aplication.Servicios.Interfaz;
 
 using Newtonsoft.Json;
 using Serilog;
 using Serilog.Events;
 
-namespace PlantillaMicroServicio.Aplicacion.Servicios.Implementacion
+namespace PlantillaMicroServicio.Aplication.Servicios.Implementacion
 {
     public class LoggerService : ILoggerService
     {
@@ -18,8 +18,6 @@ namespace PlantillaMicroServicio.Aplicacion.Servicios.Implementacion
             _configuration = configuration;
 
             var logLevelString = _configuration["SerilogConfig:Level"] ?? "Information";
-
-            // Verbose, Debug, Information, Warning, Error o Fatal para el nivel de los logs, en appsettings
             if (!Enum.TryParse(logLevelString, true, out LogEventLevel logLevel))
             {
                 logLevel = LogEventLevel.Information;

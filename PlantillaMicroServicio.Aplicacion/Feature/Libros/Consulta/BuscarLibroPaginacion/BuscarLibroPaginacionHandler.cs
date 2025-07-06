@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using PlantillaMicroServicio.Dal.Core.Paginacion.Modelos;
-using PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Vm;
-using PlantillaMicroServicio.Aplicacion.Paginacion.Libros;
+using PlantillaMicroServicio.Aplication.Feature.Libros.Vm;
+using PlantillaMicroServicio.Aplication.Paginacion.Libros;
 using PlantillaMicroServicio.Dal.Core.Interfaces;
 using AutoMapper;
 
-namespace PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Consulta.BuscarLibroPaginacion
+namespace PlantillaMicroServicio.Aplication.Feature.Libros.Consulta.BuscarLibroPaginacion
 {
     public class BuscarLibroPaginacionHandler : IRequestHandler<BuscarLibroPaginacionConsulta, PaginacionVm<LibroVm>>
     {

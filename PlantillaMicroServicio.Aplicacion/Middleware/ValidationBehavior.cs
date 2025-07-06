@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 
-namespace PlantillaMicroServicio.Aplicacion.Middleware
+namespace PlantillaMicroServicio.Aplication.Middleware
 {
     public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>

@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Vm;
+using PlantillaMicroServicio.Aplication.Feature.Libros.Vm;
 
 
-namespace PlantillaMicroServicio.Aplicacion.Feature.Libros.Consulta.BuscarLibroGuid
+namespace PlantillaMicroServicio.Aplication.Feature.Libros.Consulta.BuscarLibroGuid
 {
     public class BuscarLibroGuidConsulta : IRequest<LibroVm>
     {

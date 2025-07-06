@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using PlantillaMicroServicio.Aplicacion.Servicios.Implementacion;
-using PlantillaMicroServicio.Aplicacion.Servicios.Interfaz;
+using PlantillaMicroServicio.Aplication.Servicios.Implementacion;
+using PlantillaMicroServicio.Aplication.Servicios.Interfaz;
 using Serilog;
 
-namespace PlantillaMicroServicio.Aplicacion
+namespace PlantillaMicroServicio.Aplication
 {
     public static class ConfiguracionLogger
     {

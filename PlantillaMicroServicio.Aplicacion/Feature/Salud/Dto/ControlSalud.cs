@@ -1,4 +1,4 @@
-﻿namespace PlantillaMicroServicio.Aplicacion.Feature.Salud.Dto
+﻿namespace PlantillaMicroServicio.Aplication.Feature.Salud.Dto
 {
     public class ControlSalud
     {

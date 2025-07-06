@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using PlantillaMicroServicio.Aplicacion.Servicios.Interfaz;
+using PlantillaMicroServicio.Aplication.Servicios.Interfaz;
 using System.Security.Claims;
 using Newtonsoft.Json;
-using PlantillaMicroServicio.Aplicacion.Servicios.Utilitario;
+using PlantillaMicroServicio.Aplication.Servicios.Utilitario;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public class FiltroRegistroSolicitudes : ActionFilterAttribute
@@ -17,7 +17,7 @@ public class FiltroRegistroSolicitudes : ActionFilterAttribute
 
     public override void OnActionExecuting(ActionExecutingContext context)
     {
-        if (!IsApiController(context)) return; // Verifica si es un controlador de API
+        if (!IsApiController(context)) return; 
 
         var usuario = GetUsuario(context);
         var endpoint = $"{context.HttpContext.Request.Method}: {context.HttpContext.Request.Path}";

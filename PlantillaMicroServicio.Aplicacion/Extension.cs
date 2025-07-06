@@ -3,13 +3,13 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PlantillaMicroServicio.Aplicacion.Mapeo;
-using PlantillaMicroServicio.Aplicacion.Middleware;
-using PlantillaMicroServicio.Aplicacion.Servicios.Implementacion;
-using PlantillaMicroServicio.Aplicacion.Servicios.Interfaz;
+using PlantillaMicroServicio.Aplication.Mapeo;
+using PlantillaMicroServicio.Aplication.Middleware;
+using PlantillaMicroServicio.Aplication.Servicios.Implementacion;
+using PlantillaMicroServicio.Aplication.Servicios.Interfaz;
 using System.Reflection;
 
-namespace PlantillaMicroServicio.Aplicacion
+namespace PlantillaMicroServicio.Aplication
 {
     public static class Extension
     {

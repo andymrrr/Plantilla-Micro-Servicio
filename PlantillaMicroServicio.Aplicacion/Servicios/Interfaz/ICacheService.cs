@@ -1,6 +1,6 @@
 ﻿
 
-namespace PlantillaMicroServicio.Aplicacion.Servicios.Interfaz
+namespace PlantillaMicroServicio.Aplication.Servicios.Interfaz
 {
     public interface ICacheService
     {

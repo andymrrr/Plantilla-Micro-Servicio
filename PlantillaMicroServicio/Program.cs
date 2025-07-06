@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using PlantillaMicroServicio.Aplicacion;
+using PlantillaMicroServicio.Aplication;
 using PlantillaMicroServicio.Dal;
 using Serilog;
 using ServicioJobs.Middleware;

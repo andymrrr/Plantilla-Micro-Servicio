@@ -1,7 +1,7 @@
 ﻿
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PlantillaMicroServicio.Aplicacion.Feature.Salud.Consulta.VerificarEstado;
+using PlantillaMicroServicio.Aplication.Feature.Salud.Consulta.VerificarEstado;
 
 namespace Connexy.Controllers
 {

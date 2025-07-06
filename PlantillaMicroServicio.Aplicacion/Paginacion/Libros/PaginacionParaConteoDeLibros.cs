@@ -1,7 +1,7 @@
 ﻿using PlantillaMicroServicio.Dal.Core.Paginacion;
 using PlantillaMicroServicio.Modelos;
 
-namespace PlantillaMicroServicio.Aplicacion.Paginacion.Libros
+namespace PlantillaMicroServicio.Aplication.Paginacion.Libros
 {
     public class PaginacionParaConteoDeLibros : PaginacionBase<Libro>
     {

@@ -2,7 +2,7 @@
 using MediatR;
 using PlantillaMicroServicio.Dal.Core.Interfaces;
 using PlantillaMicroServicio.Modelos;
-namespace PlantillaMicroServicio.Aplicacion.Feature.Libros.Comando.InicializarLibros
+namespace PlantillaMicroServicio.Aplication.Feature.Libros.Comando.InicializarLibros
 {
     public class InicializarLibrosHandler : IRequestHandler<InicializarLibrosComando, bool>
     {

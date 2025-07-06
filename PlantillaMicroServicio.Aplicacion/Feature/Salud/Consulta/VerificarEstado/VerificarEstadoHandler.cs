@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using PlantillaMicroServicio.Aplicacion.Feature.Salud.Dto;
+using PlantillaMicroServicio.Aplication.Feature.Salud.Dto;
 using PlantillaMicroServicio.Dal.Contexto;
 
-namespace PlantillaMicroServicio.Aplicacion.Feature.Salud.Consulta.VerificarEstado
+namespace PlantillaMicroServicio.Aplication.Feature.Salud.Consulta.VerificarEstado
 {
     public class VerificarEstadoHandler : IRequestHandler<VerificarEstadoConsulta, ControlSalud>
     {

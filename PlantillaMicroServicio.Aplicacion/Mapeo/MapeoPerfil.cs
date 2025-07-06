@@ -1,10 +1,10 @@
 ﻿
 
 using AutoMapper;
-using PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Vm;
+using PlantillaMicroServicio.Aplication.Feature.Libros.Vm;
 using PlantillaMicroServicio.Modelos;
 
-namespace PlantillaMicroServicio.Aplicacion.Mapeo
+namespace PlantillaMicroServicio.Aplication.Mapeo
 {
     internal class MapeoPerfil : Profile
     {

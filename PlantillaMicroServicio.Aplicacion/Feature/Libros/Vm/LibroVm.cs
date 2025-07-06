@@ -1,8 +1,8 @@
 ﻿
 
-using PlantillaMicroServicio.Aplicacion.Servicios.Utilitario;
+using PlantillaMicroServicio.Aplication.Servicios.Utilitario;
 
-namespace PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Vm
+namespace PlantillaMicroServicio.Aplication.Feature.Libros.Vm
 {
     public class LibroVm
     {

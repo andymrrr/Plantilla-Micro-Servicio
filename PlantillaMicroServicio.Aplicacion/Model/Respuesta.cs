@@ -1,4 +1,4 @@
-﻿namespace ServicioJobs.Aplicacion.Model
+﻿namespace ServicioJobs.Aplication.Model
 {
     public class RespuestaServicio<T>
     {

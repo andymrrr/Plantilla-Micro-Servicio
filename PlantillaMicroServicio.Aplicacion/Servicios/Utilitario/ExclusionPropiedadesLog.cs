@@ -2,21 +2,17 @@
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
 
-namespace PlantillaMicroServicio.Aplicacion.Servicios.Utilitario
+namespace PlantillaMicroServicio.Aplication.Servicios.Utilitario
 {
     public class ExclusionPropiedadesLog : DefaultContractResolver
     {
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
             var propiedad = base.CreateProperty(member, memberSerialization);
-
-            // Excluir propiedades marcadas con el atributo ExcludeFromLogging
             if (propiedad.AttributeProvider.GetAttributes(true).OfType<ExcluirDeLogAttribute>().Any())
             {
-                propiedad.ShouldSerialize = instance => false; // No serializa
+                propiedad.ShouldSerialize = instance => false; 
             }
-
-            // Excluir propiedades de tipo ICollection o que sean binarios
             if (propiedad.PropertyType.IsGenericType && propiedad.PropertyType.GetGenericTypeDefinition() == typeof(ICollection<>))
             {
                 propiedad.ShouldSerialize = instance => false;

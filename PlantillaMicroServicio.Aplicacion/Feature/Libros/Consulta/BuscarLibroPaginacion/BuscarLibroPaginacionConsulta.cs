@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Vm;
+using PlantillaMicroServicio.Aplication.Feature.Libros.Vm;
 using PlantillaMicroServicio.Dal.Core.Paginacion.Modelos;
 using PlantillaMicroServicio.Dal.Core.Paginacion;
 
 
-namespace PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Consulta.BuscarLibroPaginacion
+namespace PlantillaMicroServicio.Aplication.Feature.Libros.Consulta.BuscarLibroPaginacion
 {
     public class BuscarLibroPaginacionConsulta : PaginacionParametro, IRequest<PaginacionVm<LibroVm>>
     {

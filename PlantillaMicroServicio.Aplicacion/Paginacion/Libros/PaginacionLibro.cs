@@ -2,7 +2,7 @@
 using PlantillaMicroServicio.Modelos;
 
 
-namespace PlantillaMicroServicio.Aplicacion.Paginacion.Libros
+namespace PlantillaMicroServicio.Aplication.Paginacion.Libros
 {
     public class PaginacionLibro : PaginacionBase<Libro>
     {

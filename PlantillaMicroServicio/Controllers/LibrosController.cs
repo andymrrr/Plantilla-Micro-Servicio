@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PlantillaMicroServicio.Aplicacion.Feature.Libros.Comando.InicializarLibros;
-using PlantillaMicroServicio.Aplicacion.Feature.Libros.Consulta.BuscarLibroGuid;
-using PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Consulta.BuscarLibroPaginacion;
-using PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Vm;
+using PlantillaMicroServicio.Aplication.Feature.Libros.Comando.InicializarLibros;
+using PlantillaMicroServicio.Aplication.Feature.Libros.Consulta.BuscarLibroGuid;
+using PlantillaMicroServicio.Aplication.Feature.Libros.Consulta.BuscarLibroPaginacion;
+using PlantillaMicroServicio.Aplication.Feature.Libros.Vm;
 using PlantillaMicroServicio.Dal.Core.Paginacion.Modelos;
 using System.Net;
 
