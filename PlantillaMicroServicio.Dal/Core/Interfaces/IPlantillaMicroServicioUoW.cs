@@ -1,15 +1,7 @@
-﻿using PlantillaMicroServicio.Models;
-
-
-namespace PlantillaMicroServicio.Dal.Core.Interfaces
+﻿namespace PlantillaMicroServicio.Dal.Core.Interfaces
 {
     public interface IPlantillaMicroServicioUoW : IDisposable
     {
-
-        IRepositorio<Libro> Libros { get; set; }
-       
-
-
         void GuardarCambios();
         Task GuardarCambiosAsync();
 

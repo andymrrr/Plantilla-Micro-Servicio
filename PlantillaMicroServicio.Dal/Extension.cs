@@ -3,11 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using PlantillaMicroServicio.Core.Repositorios;
 using PlantillaMicroServicio.Dal.Contexto;
 using PlantillaMicroServicio.Dal.Core.Interfaces;
-using PlantillaMicroServicio.Dal.Core.Repositorios;
-using PlantillaMicroServicio.Models.Configuracion;
+using PlantillaMicroServicio.Dal.Core.Repositories;
+using PlantillaMicroServicio.Dal.Models.Configuracion;
 using System.Text;
 
 namespace PlantillaMicroServicio.Dal

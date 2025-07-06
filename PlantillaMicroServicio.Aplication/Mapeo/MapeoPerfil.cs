@@ -1,8 +1,4 @@
-﻿
-
-using AutoMapper;
-using PlantillaMicroServicio.Aplication.Feature.Libros.Vm;
-using PlantillaMicroServicio.Models;
+﻿using AutoMapper;
 
 namespace PlantillaMicroServicio.Aplication.Mapeo
 {
@@ -10,7 +6,7 @@ namespace PlantillaMicroServicio.Aplication.Mapeo
     {
         public MapeoPerfil()
         {
-            CreateMap<Libro,LibroVm>().ReverseMap();
+          
         }
     }
 }

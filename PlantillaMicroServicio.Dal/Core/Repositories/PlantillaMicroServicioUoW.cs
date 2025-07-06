@@ -1,23 +1,15 @@
-﻿using PlantillaMicroServicio.Core.Repositorios;
+﻿
 using PlantillaMicroServicio.Dal.Contexto;
 using PlantillaMicroServicio.Dal.Core.Interfaces;
-using PlantillaMicroServicio.Models;
 
-namespace PlantillaMicroServicio.Dal.Core.Repositorios
+namespace PlantillaMicroServicio.Dal.Core.Repositories
 {
     public class PlantillaMicroServicioUoW : IPlantillaMicroServicioUoW
     {
         private ContextPlantillaMicroServicio _context { get; }
-        public IRepositorio<Libro> Libros { get; set; }
-      
-
-
-
         public PlantillaMicroServicioUoW(ContextPlantillaMicroServicio context)
         {
             _context = context;
-
-            Libros = new Repositorio<Libro>(context);
           
         }
 

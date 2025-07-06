@@ -3,12 +3,12 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using PlantillaMicroServicio.Dal.Core.Interfaces;
 using PlantillaMicroServicio.Models;
-using PlantillaMicroServicio.Models.Configuracion;
+using PlantillaMicroServicio.Dal.Models.Configuracion;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace PlantillaMicroServicio.Dal.Core.Repositorios
+namespace PlantillaMicroServicio.Dal.Core.Repositories
 {
     public class Autenticacion : IAutenticacion
     {

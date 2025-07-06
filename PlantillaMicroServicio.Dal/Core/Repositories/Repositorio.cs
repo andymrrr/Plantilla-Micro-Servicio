@@ -5,7 +5,7 @@ using PlantillaMicroServicio.Dal.Core.Paginacion;
 using System.Linq.Expressions;
 using PlantillaMicroServicio.Dal.Contexto;
 
-namespace PlantillaMicroServicio.Core.Repositorios
+namespace PlantillaMicroServicio.Dal.Core.Repositories
 {
     public class Repositorio<T> : IRepositorio<T> where T : class
     {

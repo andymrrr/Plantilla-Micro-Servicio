@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Feature\Libros\**" />
+    <Compile Remove="Paginacion\**" />
+    <EmbeddedResource Remove="Feature\Libros\**" />
+    <EmbeddedResource Remove="Paginacion\**" />
+    <None Remove="Feature\Libros\**" />
+    <None Remove="Paginacion\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Bogus" Version="35.6.1" />
     <PackageReference Include="FluentValidation" Version="11.11.0" />
