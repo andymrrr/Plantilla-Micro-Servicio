@@ -3,9 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using PlantillaMicroServicio.Core.Repositorios;
 using PlantillaMicroServicio.Dal.Contexto;
-using PlantillaMicroServicio.Dal.Nucleo.Interfaces;
-using PlantillaMicroServicio.Dal.Nucleo.Repositorios;
+using PlantillaMicroServicio.Dal.Core.Interfaces;
+using PlantillaMicroServicio.Dal.Core.Repositorios;
 using PlantillaMicroServicio.Modelos.Configuracion;
 using System.Text;
 

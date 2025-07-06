@@ -1,8 +1,5 @@
-﻿
-
-using System.Linq.Expressions;
-
-namespace PlantillaMicroServicio.Dal.Nucleo.Paginacion.Interfaces
+﻿using System.Linq.Expressions;
+namespace PlantillaMicroServicio.Dal.Core.Paginacion.Interfaces
 {
     public interface IPaginacion<T>
     {

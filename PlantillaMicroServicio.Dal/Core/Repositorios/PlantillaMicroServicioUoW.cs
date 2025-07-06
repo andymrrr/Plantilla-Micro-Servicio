@@ -1,20 +1,13 @@
-﻿using Azure;
+﻿using PlantillaMicroServicio.Core.Repositorios;
 using PlantillaMicroServicio.Dal.Contexto;
-using PlantillaMicroServicio.Dal.Nucleo.Interfaces;
+using PlantillaMicroServicio.Dal.Core.Interfaces;
 using PlantillaMicroServicio.Modelos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PlantillaMicroServicio.Dal.Nucleo.Repositorios
+namespace PlantillaMicroServicio.Dal.Core.Repositorios
 {
     public class PlantillaMicroServicioUoW : IPlantillaMicroServicioUoW
     {
         private ContextPlantillaMicroServicio _context { get; }
-
-        // Repositorios
         public IRepositorio<Libro> Libros { get; set; }
       
 
@@ -39,7 +32,6 @@ namespace PlantillaMicroServicio.Dal.Nucleo.Repositorios
             await _context.SaveChangesAsync();
         }
 
-        // Método para liberar recursos
         public void Dispose()
         {
             _context.Dispose();

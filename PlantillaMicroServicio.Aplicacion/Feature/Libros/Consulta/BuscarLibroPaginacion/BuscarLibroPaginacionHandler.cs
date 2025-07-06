@@ -1,14 +1,8 @@
 ﻿using MediatR;
-using PlantillaMicroServicio.Dal.Nucleo.Paginacion.Modelos;
-using PlantillaMicroServicio.Dal.Nucleo.Paginacion;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PlantillaMicroServicio.Dal.Core.Paginacion.Modelos;
 using PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Vm;
 using PlantillaMicroServicio.Aplicacion.Paginacion.Libros;
-using PlantillaMicroServicio.Dal.Nucleo.Interfaces;
+using PlantillaMicroServicio.Dal.Core.Interfaces;
 using AutoMapper;
 
 namespace PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Consulta.BuscarLibroPaginacion

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlantillaMicroServicio.Dal.Nucleo.Paginacion.Interfaces;
+using PlantillaMicroServicio.Dal.Core.Paginacion.Interfaces;
 
-namespace PlantillaMicroServicio.Dal.Nucleo.Paginacion
+namespace PlantillaMicroServicio.Dal.Core.Paginacion
 {
     public class EvaluarPaginacion<T> where T : class
     {

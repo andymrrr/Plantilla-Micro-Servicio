@@ -4,7 +4,7 @@ using PlantillaMicroServicio.Aplicacion.Feature.Libros.Comando.InicializarLibros
 using PlantillaMicroServicio.Aplicacion.Feature.Libros.Consulta.BuscarLibroGuid;
 using PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Consulta.BuscarLibroPaginacion;
 using PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Vm;
-using PlantillaMicroServicio.Dal.Nucleo.Paginacion.Modelos;
+using PlantillaMicroServicio.Dal.Core.Paginacion.Modelos;
 using System.Net;
 
 namespace PlantillaMicroServicio.Controllers

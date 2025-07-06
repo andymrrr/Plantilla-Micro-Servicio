@@ -1,7 +1,7 @@
-﻿using PlantillaMicroServicio.Dal.Nucleo.Paginacion.Interfaces;
+﻿using PlantillaMicroServicio.Dal.Core.Paginacion.Interfaces;
 using System.Linq.Expressions;
 
-namespace PlantillaMicroServicio.Dal.Nucleo.Interfaces
+namespace PlantillaMicroServicio.Dal.Core.Interfaces
 {
     public interface IRepositorio<T> where T : class
     {

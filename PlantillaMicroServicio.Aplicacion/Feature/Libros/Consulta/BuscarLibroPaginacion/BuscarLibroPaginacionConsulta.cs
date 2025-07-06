@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Vm;
-using PlantillaMicroServicio.Dal.Nucleo.Paginacion.Modelos;
-using PlantillaMicroServicio.Dal.Nucleo.Paginacion;
+using PlantillaMicroServicio.Dal.Core.Paginacion.Modelos;
+using PlantillaMicroServicio.Dal.Core.Paginacion;
 
 
 namespace PlantillaMicroServicio.Aplicacion.Funcionalidad.Libros.Consulta.BuscarLibroPaginacion

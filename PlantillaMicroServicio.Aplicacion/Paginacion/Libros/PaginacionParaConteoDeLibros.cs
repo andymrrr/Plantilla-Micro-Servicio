@@ -1,4 +1,4 @@
-﻿using PlantillaMicroServicio.Dal.Nucleo.Paginacion;
+﻿using PlantillaMicroServicio.Dal.Core.Paginacion;
 using PlantillaMicroServicio.Modelos;
 
 namespace PlantillaMicroServicio.Aplicacion.Paginacion.Libros

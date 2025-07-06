@@ -1,7 +1,7 @@
 ﻿using PlantillaMicroServicio.Modelos;
 
 
-namespace PlantillaMicroServicio.Dal.Nucleo.Interfaces
+namespace PlantillaMicroServicio.Dal.Core.Interfaces
 {
     public interface IAutenticacion
     {

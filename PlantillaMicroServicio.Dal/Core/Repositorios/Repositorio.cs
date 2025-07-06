@@ -1,16 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlantillaMicroServicio.Dal.Nucleo.Interfaces;
-using PlantillaMicroServicio.Dal.Nucleo.Paginacion.Interfaces;
-using PlantillaMicroServicio.Dal.Nucleo.Paginacion;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using PlantillaMicroServicio.Dal.Core.Interfaces;
+using PlantillaMicroServicio.Dal.Core.Paginacion.Interfaces;
+using PlantillaMicroServicio.Dal.Core.Paginacion;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using PlantillaMicroServicio.Dal.Contexto;
 
-namespace PlantillaMicroServicio.Dal.Nucleo.Repositorios
+namespace PlantillaMicroServicio.Core.Repositorios
 {
     public class Repositorio<T> : IRepositorio<T> where T : class
     {

@@ -1,18 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using PlantillaMicroServicio.Dal.Nucleo.Interfaces;
+using PlantillaMicroServicio.Dal.Core.Interfaces;
 using PlantillaMicroServicio.Modelos;
 using PlantillaMicroServicio.Modelos.Configuracion;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace PlantillaMicroServicio.Dal.Nucleo.Repositorios
+namespace PlantillaMicroServicio.Dal.Core.Repositorios
 {
     public class Autenticacion : IAutenticacion
     {

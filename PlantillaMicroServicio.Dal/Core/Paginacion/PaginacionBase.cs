@@ -1,7 +1,7 @@
-﻿using PlantillaMicroServicio.Dal.Nucleo.Paginacion.Interfaces;
+﻿using PlantillaMicroServicio.Dal.Core.Paginacion.Interfaces;
 using System.Linq.Expressions;
 
-namespace PlantillaMicroServicio.Dal.Nucleo.Paginacion
+namespace PlantillaMicroServicio.Dal.Core.Paginacion
 {
     public class PaginacionBase<T> : IPaginacion<T>
     {
