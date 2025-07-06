@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlantillaMicroServicio.Dal"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlantillaMicroServicio.Modelos", "PlantillaMicroServicio.Modelos\PlantillaMicroServicio.Modelos.csproj", "{45B7EC3F-DD18-467B-AFE3-31970AC89A1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlantillaMicroServicio.Aplication", "PlantillaMicroServicio.Aplication\PlantillaMicroServicio.Aplication.csproj", "{B12D6E22-AE10-41C6-9A41-E053846AE912}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlantillaMicroServicio.Aplication", "PlantillaMicroServicio.Aplicacion\PlantillaMicroServicio.Aplication.csproj", "{B12D6E22-AE10-41C6-9A41-E053846AE912}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
