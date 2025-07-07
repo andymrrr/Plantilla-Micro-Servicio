@@ -92,7 +92,6 @@ namespace PlantillaMicroServicio.Infrastructure.Extensions
 
         private static void AddAuthenticationServices(this IServiceCollection servicios)
         {
-            servicios.AddScoped<IAutenticacion, Autenticacion>();
             servicios.AddScoped<IJwtService, JwtService>();
         }
     }

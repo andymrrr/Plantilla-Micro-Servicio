@@ -2,9 +2,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using PlantillaMicroServicio.Aplication;
 using PlantillaMicroServicio.Dal;
+using PlantillaMicroServicio.Extensions;
 using PlantillaMicroServicio.Infrastructure.Extensions;
+using PlantillaMicroServicio.Middleware;
 using Serilog;
-using ServicioJobs.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,13 +23,13 @@ builder.Services.AddControllers(opcion =>
 
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerWithJWT(builder.Configuration);
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddServicioDatos(builder.Configuration);
 builder.Services.AddServicioAplicacion(builder.Configuration);
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -37,7 +38,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 app.UseSerilogRequestLogging();
+app.UseExceptionHandling();
 app.MapControllers();
-app.UseMiddleware<ValidationExceptionMiddleware>();
 
 app.Run();
