@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using PlantillaMicroServicio.Dal.Core.Interfaces;
+using PlantillaMicroServicio.Infrastructure.Authentication;
 using PlantillaMicroServicio.Models;
-using PlantillaMicroServicio.Dal.Models.Configuracion;
+using PlantillaMicroServicio.Models.Configuracion;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace PlantillaMicroServicio.Dal.Core.Repositories
+namespace PlantillaMicroServicio.Infrastructure.Authentication
 {
     public class Autenticacion : IAutenticacion
     {
@@ -36,28 +36,38 @@ namespace PlantillaMicroServicio.Dal.Core.Repositories
                 throw new ArgumentNullException(nameof(usuario), "El usuario no puede ser nulo.");
             }
 
+            if (string.IsNullOrEmpty(_ConfiguracionJwt.Llave))
+            {
+                throw new InvalidOperationException("La llave JWT no está configurada.");
+            }
+
             try
             {
                 var claims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.NameId, usuario.NombreUsuario!),
-                    new Claim("IdUsuario", usuario.UsuarioID.ToString()),
-                    new Claim("Correo", usuario.Email!)
+                    new Claim(JwtRegisteredClaimNames.Sub, usuario.UsuarioID.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Email, usuario.Email!),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)
                 };
-
 
                 if (roles?.Any() == true)
                 {
                     claims.AddRange(roles.Select(rol => new Claim(ClaimTypes.Role, rol)));
                 }
 
-                var llave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_ConfiguracionJwt.Llave!));
+                var llave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_ConfiguracionJwt.Llave));
                 var credenciales = new SigningCredentials(llave, SecurityAlgorithms.HmacSha512Signature);
 
                 var descripcionToken = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(claims),
                     Expires = DateTime.UtcNow.Add(_ConfiguracionJwt.TiempoExpira),
+                    IssuedAt = DateTime.UtcNow,
+                    NotBefore = DateTime.UtcNow,
+                    Issuer = _ConfiguracionJwt.Asunto,
+                    Audience = _ConfiguracionJwt.Audiencia,
                     SigningCredentials = credenciales
                 };
 
@@ -76,6 +86,5 @@ namespace PlantillaMicroServicio.Dal.Core.Repositories
                 return null;
             }
         }
-
     }
 }

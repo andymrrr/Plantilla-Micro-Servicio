@@ -1,7 +1,6 @@
-﻿using PlantillaMicroServicio.Models;
+using PlantillaMicroServicio.Models;
 
-
-namespace PlantillaMicroServicio.Dal.Core.Interfaces
+namespace PlantillaMicroServicio.Infrastructure.Authentication
 {
     public interface IAutenticacion
     {

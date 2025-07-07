@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using PlantillaMicroServicio.Aplication;
 using PlantillaMicroServicio.Dal;
+using PlantillaMicroServicio.Infrastructure.Extensions;
 using Serilog;
 using ServicioJobs.Middleware;
 
@@ -22,6 +23,7 @@ builder.Services.AddControllers(opcion =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddServicioDatos(builder.Configuration);
 builder.Services.AddServicioAplicacion(builder.Configuration);
 var app = builder.Build();

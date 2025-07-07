@@ -1,9 +1,9 @@
 ﻿
 
-namespace PlantillaMicroServicio.Dal.Models.Configuracion
+namespace PlantillaMicroServicio.Models.Configuracion
 {
     public class ConfiguracionCache
     {
-        public int TiempoExpiracion { get; set; } = 300; 
+        public int TiempoExpiracion { get; set; } = 300;
     }
 }
