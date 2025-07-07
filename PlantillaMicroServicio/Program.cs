@@ -22,14 +22,13 @@ builder.Services.AddControllers(opcion =>
     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
 });
 
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerWithJWT(builder.Configuration);
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddServicioDatos(builder.Configuration);
 builder.Services.AddServicioAplicacion(builder.Configuration);
-var app = builder.Build();
 
+var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {

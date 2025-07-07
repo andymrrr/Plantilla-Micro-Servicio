@@ -1,0 +1,258 @@
+# ========================================
+# DOCKER COMPOSE PARA PRODUCCIÓN
+# ========================================
+# Configuración optimizada para entornos de producción
+# Usa variables de entorno para configuración dinámica
+
+version: "3.8"
+
+# ========================================
+# VARIABLES DE ENTORNO PARA PRODUCCIÓN
+# ========================================
+
+x-common-variables: &common-variables
+  PROJECT_NAME: ${PROJECT_NAME:-PlantillaMicroServicio}
+  ASPNETCORE_ENVIRONMENT: Production
+  DATABASE_PROVIDER: ${DATABASE_PROVIDER:-sqlserver}
+  JWT_SECRET: ${JWT_SECRET}
+
+# ========================================
+# SERVICIOS DE PRODUCCIÓN
+# ========================================
+
+services:
+  # ========================================
+  # MICROSERVICIO PRINCIPAL (PRODUCCIÓN)
+  # ========================================
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        RUNTIME_VERSION: ${RUNTIME_VERSION:-8.0}
+        BUILD_CONFIGURATION: Release
+    container_name: PlantillaMicroServicio-api-prod
+    ports:
+      - "${API_PORT:-8080}:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: ${ASPNETCORE_URLS:-http://+:8080}
+      DATABASE_PROVIDER: ${DATABASE_PROVIDER:-sqlserver}
+      JWT_SECRET: ${JWT_SECRET}
+      DB_PASSWORD: ${DB_PASSWORD}
+      ASPNETCORE_Kestrel__Limits__MaxConcurrentConnections: ${ASPNETCORE_KESTREL_MAX_CONNECTIONS:-1000}
+      ASPNETCORE_Kestrel__Limits__MaxConcurrentUpgradedConnections: ${ASPNETCORE_KESTREL_MAX_WEBSOCKET:-1000}
+      ASPNETCORE_Kestrel__Limits__MaxRequestBodySize: ${ASPNETCORE_KESTREL_MAX_BODY_SIZE:-52428800}
+      SERILOG_LEVEL: ${SERILOG_LEVEL:-Warning}
+      SERILOG_FILE_PATH: ${SERILOG_FILE_PATH:-/app/logs/app-.log}
+      SERILOG_SEQ_URL: ${SERILOG_SEQ_URL:-http://seq:5341}
+      CONNECTION_STRING_SQLSERVER: ${CONNECTION_STRING_SQLSERVER}
+      CONNECTION_STRING_POSTGRES: ${CONNECTION_STRING_POSTGRES}
+      JWT_ISSUER: ${JWT_ISSUER:-PlantillaMicroServicio}
+      JWT_AUDIENCE: ${JWT_AUDIENCE:-PlantillaMicroServicio}
+      JWT_DURATION_MINUTES: ${JWT_DURATION_MINUTES:-30}
+      JWT_CLOCK_SKEW_MINUTES: ${JWT_CLOCK_SKEW_MINUTES:-1}
+      JWT_VALIDATE_ISSUER: ${JWT_VALIDATE_ISSUER:-true}
+      JWT_VALIDATE_AUDIENCE: ${JWT_VALIDATE_AUDIENCE:-true}
+      JWT_REQUIRE_EXPIRATION: ${JWT_REQUIRE_EXPIRATION:-true}
+      JWT_VALIDATE_LIFETIME: ${JWT_VALIDATE_LIFETIME:-true}
+      CACHE_EXPIRATION_SECONDS: ${CACHE_EXPIRATION_SECONDS:-600}
+      REDIS_CONNECTION_STRING: ${REDIS_CONNECTION_STRING:-redis:6379}
+      CORS_ORIGINS: ${CORS_ORIGINS}
+      RATE_LIMIT_PER_MINUTE: ${RATE_LIMIT_PER_MINUTE:-1000}
+      ENABLE_HTTPS_REDIRECTION: ${ENABLE_HTTPS_REDIRECTION:-true}
+      ENABLE_HEALTH_CHECKS: ${ENABLE_HEALTH_CHECKS:-true}
+      METRICS_ENDPOINT: ${METRICS_ENDPOINT:-/metrics}
+      PROMETHEUS_ENABLED: ${PROMETHEUS_ENABLED:-true}
+      ASPNETCORE_FORWARDEDHEADERS_ENABLED: true
+      ASPNETCORE_FORWARDEDHEADERS_FORWARDEDPROTO: https
+    volumes:
+      - ${LOG_PATH:-./logs}:/app/logs
+      - ${DATA_PATH:-./data}:/app/data
+    networks:
+      - production-network
+    restart: unless-stopped
+    deploy:
+      replicas: ${API_REPLICAS:-2}
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1G
+        reservations:
+          cpus: "0.5"
+          memory: 512M
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: rollback
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/salud"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # ========================================
+  # LOAD BALANCER (NGINX)
+  # ========================================
+  nginx:
+    image: nginx:alpine
+    container_name: PlantillaMicroServicio-nginx
+    ports:
+      - "${NGINX_PORT:-80}:80"
+      - "${NGINX_SSL_PORT:-443}:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ${LOG_PATH:-./logs}/nginx:/var/log/nginx
+    networks:
+      - production-network
+    restart: unless-stopped
+    depends_on:
+      - api
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ========================================
+  # REDIS (PRODUCCIÓN)
+  # ========================================
+  redis:
+    image: redis:7-alpine
+    container_name: PlantillaMicroServicio-redis-prod
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    networks:
+      - production-network
+    restart: unless-stopped
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ========================================
+  # SEQ (PRODUCCIÓN)
+  # ========================================
+  seq:
+    image: datalust/seq:latest
+    container_name: PlantillaMicroServicio-seq-prod
+    ports:
+      - "${SEQ_PORT:-5341}:80"
+    volumes:
+      - seq_data:/data
+    networks:
+      - production-network
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: Y
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1G
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost/api/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ========================================
+  # MONITORING (PROMETHEUS)
+  # ========================================
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: PlantillaMicroServicio-prometheus
+    ports:
+      - "${PROMETHEUS_PORT:-9090}:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    networks:
+      - production-network
+    restart: unless-stopped
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/etc/prometheus/console_libraries"
+      - "--web.console.templates=/etc/prometheus/consoles"
+      - "--storage.tsdb.retention.time=200h"
+      - "--web.enable-lifecycle"
+
+  # ========================================
+  # MONITORING (GRAFANA)
+  # ========================================
+  grafana:
+    image: grafana/grafana:latest
+    container_name: PlantillaMicroServicio-grafana
+    ports:
+      - "${GRAFANA_PORT:-3000}:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    networks:
+      - production-network
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin123}
+    depends_on:
+      - prometheus
+
+# ========================================
+# VOLÚMENES DE PRODUCCIÓN
+# ========================================
+volumes:
+  redis_data:
+    driver: local
+  seq_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+
+# ========================================
+# REDES DE PRODUCCIÓN
+# ========================================
+networks:
+  production-network:
+    driver: bridge
+    name: PlantillaMicroServicio-prod-network

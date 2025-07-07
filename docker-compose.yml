@@ -1,0 +1,100 @@
+# ========================================
+# DOCKER COMPOSE PROFESIONAL PARA MICROSERVICIO
+# ========================================
+# Este archivo está diseñado para desarrollo y testing
+# Usa variables de entorno para configuración dinámica
+
+version: "3.8"
+
+# ========================================
+# VARIABLES DE ENTORNO
+# ========================================
+# Estas variables pueden ser sobrescritas con un archivo .env
+# o pasadas como argumentos al ejecutar docker-compose
+
+x-common-variables: &common-variables
+  PROJECT_NAME: ${PROJECT_NAME:-PlantillaMicroServicio}
+  ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+  DATABASE_PROVIDER: ${DATABASE_PROVIDER:-sqlserver}
+  JWT_SECRET: ${JWT_SECRET:-YourSuperSecretKeyHere123456789012345678901234567890123456789012345678901234567890}
+
+# ========================================
+# SERVICIOS
+# ========================================
+
+services:
+  # ========================================
+  # MICROSERVICIO PRINCIPAL
+  # ========================================
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        RUNTIME_VERSION: ${RUNTIME_VERSION:-8.0}
+        BUILD_CONFIGURATION: ${BUILD_CONFIGURATION:-Release}
+    container_name: PlantillaMicroServicio-api
+    ports:
+      - "${API_PORT:-8080}:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      ASPNETCORE_URLS: ${ASPNETCORE_URLS:-http://+:8080}
+      JWT_SECRET: ${JWT_SECRET}
+      SERILOG_LEVEL: ${SERILOG_LEVEL:-Information}
+      SERILOG_FILE_PATH: ${SERILOG_FILE_PATH:-/app/logs/app-.log}
+      SERILOG_SEQ_URL: ${SERILOG_SEQ_URL:-http://seq:5341}
+      JWT_ISSUER: ${JWT_ISSUER:-PlantillaMicroServicio}
+      JWT_AUDIENCE: ${JWT_AUDIENCE:-PlantillaMicroServicio}
+      JWT_DURATION_MINUTES: ${JWT_DURATION_MINUTES:-60}
+      JWT_CLOCK_SKEW_MINUTES: ${JWT_CLOCK_SKEW_MINUTES:-2}
+      JWT_VALIDATE_ISSUER: ${JWT_VALIDATE_ISSUER:-true}
+      JWT_VALIDATE_AUDIENCE: ${JWT_VALIDATE_AUDIENCE:-true}
+      JWT_REQUIRE_EXPIRATION: ${JWT_REQUIRE_EXPIRATION:-true}
+      JWT_VALIDATE_LIFETIME: ${JWT_VALIDATE_LIFETIME:-true}
+      RATE_LIMIT_PER_MINUTE: ${RATE_LIMIT_PER_MINUTE:-100}
+      ENABLE_HTTPS_REDIRECTION: ${ENABLE_HTTPS_REDIRECTION:-false}
+      ENABLE_HEALTH_CHECKS: ${ENABLE_HEALTH_CHECKS:-true}
+      METRICS_ENDPOINT: ${METRICS_ENDPOINT:-/metrics}
+      PROMETHEUS_ENABLED: ${PROMETHEUS_ENABLED:-true}
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - microservice-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/salud"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # ========================================
+  # SEQ (OPCIONAL - PARA LOGGING)
+  # ========================================
+  seq:
+    image: datalust/seq:latest
+    container_name: PlantillaMicroServicio-seq
+    ports:
+      - "${SEQ_PORT:-5341}:80"
+    volumes:
+      - seq_data:/data
+    networks:
+      - microservice-network
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: Y
+
+# ========================================
+# VOLÚMENES
+# ========================================
+volumes:
+  seq_data:
+    driver: local
+
+# ========================================
+# REDES
+# ========================================
+networks:
+  microservice-network:
+    driver: bridge
+    name: PlantillaMicroServicio-network

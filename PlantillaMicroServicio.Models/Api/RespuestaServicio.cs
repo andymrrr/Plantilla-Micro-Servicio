@@ -123,7 +123,7 @@ namespace PlantillaMicroServicio.Models.Api
             {
                 Completado = false,
                 Mensaje = mensaje,
-                TipoError = Models.Api.TipoError.Prohibido
+                TipoError = Api.TipoError.Prohibido
             };
         }
     }

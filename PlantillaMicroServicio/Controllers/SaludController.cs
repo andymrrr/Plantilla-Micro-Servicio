@@ -1,40 +1,37 @@
-﻿
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PlantillaMicroServicio.Aplication.Feature.Salud.Consulta.VerificarEstado;
+using PlantillaMicroServicio.Aplication.Feature.Salud.Dto;
 using PlantillaMicroServicio.Infrastructure.Logging;
 
-namespace Connexy.Controllers
+namespace PlantillaMicroServicio.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class SaludController : ControllerBase
     {
-        private readonly IMediator _mediador;
+        private readonly IMediator _mediator;
         private readonly ILoggerService _loggerService;
 
         public SaludController(IMediator mediator, ILoggerService loggerService)
         {
-            _mediador = mediator;
+            _mediator = mediator;
             _loggerService = loggerService;
         }
+
         [HttpGet]
         public async Task<IActionResult> VerificarEstado()
         {
-            _loggerService.LogInformation("Verificando estado del servicio", new { Timestamp = DateTime.UtcNow });
-
             try
             {
-                var resultado = await _mediador.Send(new VerificarEstadoConsulta());
-
-                _loggerService.LogBusinessOperation("VerificarEstado", new { Estado = resultado.Estado }, resultado.Estado == "Saludable");
-
-                return resultado.Estado == "Saludable" ? Ok(resultado) : StatusCode(500, resultado);
+                var consulta = new VerificarEstadoConsulta();
+                var resultado = await _mediator.Send(consulta);
+                return Ok(resultado);
             }
             catch (Exception ex)
             {
-                _loggerService.LogError("Error al verificar estado del servicio", ex, new { Timestamp = DateTime.UtcNow });
-                throw;
+                _loggerService.LogError("Error al verificar estado del servicio", ex);
+                return StatusCode(500, new { mensaje = "Error interno del servidor" });
             }
         }
     }

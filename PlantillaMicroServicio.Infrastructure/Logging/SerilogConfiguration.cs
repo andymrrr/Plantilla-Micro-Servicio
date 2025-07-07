@@ -6,14 +6,8 @@ using Serilog.Formatting.Json;
 
 namespace PlantillaMicroServicio.Infrastructure.Logging
 {
-    /// <summary>
-    /// Configuración profesional de Serilog para la aplicación
-    /// </summary>
     public static class SerilogConfiguration
     {
-        /// <summary>
-        /// Configura Serilog con múltiples sinks y logging estructurado
-        /// </summary>
         public static void ConfigureSerilog(IConfiguration configuration, string environment)
         {
             var loggerConfiguration = new LoggerConfiguration()
@@ -24,7 +18,7 @@ namespace PlantillaMicroServicio.Infrastructure.Logging
                 .Enrich.WithProcessId()
                 .Enrich.WithThreadId();
 
-            // Configuración por ambiente
+           
             if (environment.Equals("Development", StringComparison.OrdinalIgnoreCase))
             {
                 ConfigureDevelopmentLogging(loggerConfiguration, configuration);
@@ -34,7 +28,7 @@ namespace PlantillaMicroServicio.Infrastructure.Logging
                 ConfigureProductionLogging(loggerConfiguration, configuration);
             }
 
-            // Crear y asignar el logger
+            
             Log.Logger = loggerConfiguration.CreateLogger();
         }
 
@@ -81,7 +75,7 @@ namespace PlantillaMicroServicio.Infrastructure.Logging
                     shared: true,
                     flushToDiskInterval: TimeSpan.FromSeconds(5));
 
-            // Configuración adicional para producción (ej: Elasticsearch, Seq, etc.)
+          
             var seqUrl = configuration["Serilog:SeqUrl"];
             if (!string.IsNullOrEmpty(seqUrl))
             {

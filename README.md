@@ -1,319 +1,385 @@
-# 🚀 Plantilla de Microservicio Profesional - Clean Architecture
+# 🚀 Plantilla Microservicio .NET - Docker Profesional
 
-## 📋 Descripción
-
-Esta plantilla está diseñada para construir microservicios profesionales en .NET siguiendo los principios de **Clean Architecture** y **Domain-Driven Design (DDD)**. La estructura del proyecto promueve la separación de responsabilidades, la mantenibilidad y el escalado, implementando patrones modernos como **CQRS** y **MediatR**.
+Una plantilla completa y profesional para crear microservicios en .NET 8 con Docker, diseñada para ser **completamente configurable** y **listo para producción**.
 
 ## ✨ Características Principales
 
-### 🏗️ Arquitectura
+### 🐳 **Docker Profesional**
 
-- **Clean Architecture** con separación clara de capas
-- **Domain-Driven Design (DDD)** implementado
-- **CQRS** con MediatR para separación de comandos y consultas
-- **SOLID Principles** aplicados en toda la estructura
-
-### 🔐 Seguridad
-
-- **Autenticación JWT** profesional y configurable
-- **Validación de tokens** con claims estándar
-- **Renovación automática** de tokens
-- **Configuración de seguridad** flexible
-
-### 📚 Documentación
-
-- **Swagger/OpenAPI** integrado con autenticación JWT
-- **Documentación automática** de endpoints
-- **Interfaz interactiva** para pruebas de API
-- **Anotaciones** completas en controladores
-
-### 🛠️ Infraestructura
-
-- **Middleware de excepciones** unificado y profesional
+- **Multi-stage builds** para optimización
+- **Variables dinámicas** para configuración automática
+- **Health checks** integrados
+- **Usuario no-root** para seguridad
 - **Logging estructurado** con Serilog
-- **Sistema de caché** configurable
-- **Manejo de errores** robusto con respuestas consistentes
 
-### 🗄️ Base de Datos
+### 🔧 **Configuración Automática**
 
-- **Entity Framework Core** configurado
-- **Soporte multi-proveedor**: SQL Server, PostgreSQL, MySQL
-- **Migrations** automáticas
-- **Repository Pattern** implementado
+- **Script de inicialización** que renombra todo automáticamente
+- **Variables de entorno** dinámicas
+- **Configuración por ambiente** (Development/Production)
+- **Generación automática** de contraseñas seguras
+
+### 🏗️ **Arquitectura Limpia**
+
+- **Clean Architecture** implementada
+- **CQRS** con MediatR
+- **Dependency Injection** configurado
+- **Repository Pattern** con Unit of Work
+
+### 📊 **Monitoreo y Logging**
+
+- **Serilog** con logging estructurado
+- **Seq** para visualización de logs
+- **Prometheus** para métricas
+- **Grafana** para dashboards
+- **Health checks** automáticos
+
+### 🔒 **Seguridad**
+
+- **JWT Authentication** configurado
+- **HTTPS** listo para producción
+- **CORS** configurado
+- **Rate limiting** integrado
+
+## 🚀 Inicio Rápido
+
+### 1. **Clonar el Template**
+
+```bash
+git clone <tu-repositorio>
+cd Plantilla-Micro-Servicio
+```
+
+### 2. **Ejecutar Script de Inicialización**
+
+```bash
+./init-project.sh
+```
+
+El script te guiará a través de:
+
+- ✅ Configuración del nombre del proyecto
+- ✅ Selección de base de datos
+- ✅ Configuración de puertos
+- ✅ Generación de credenciales seguras
+- ✅ Renombrado automático de archivos
+- ✅ Despliegue inicial
+
+### 3. **Acceder a los Servicios**
+
+Una vez completado, tendrás acceso a:
+
+- 🌐 **API**: http://localhost:8080
+- 📚 **Swagger**: http://localhost:8080/swagger
+- 📊 **Seq (Logs)**: http://localhost:5341
+- 🗄️ **Base de Datos**: localhost:1433
+
+## 🛠️ Comandos Útiles
+
+### **Desarrollo Local**
+
+```bash
+# Ejecutar en modo desarrollo
+make dev
+
+# Construir proyecto
+make build
+
+# Ejecutar tests
+make test
+
+# Limpiar archivos de build
+make clean
+```
+
+### **Docker**
+
+```bash
+# Levantar servicios
+make up
+
+# Ver logs
+make logs
+
+# Detener servicios
+make down
+
+# Reconstruir y levantar
+make rebuild
+
+# Ver estado de servicios
+make status
+```
+
+### **Base de Datos**
+
+```bash
+# Acceder al shell de la BD
+make db-shell
+
+# Crear backup
+make db-backup
+
+# Restaurar backup
+make db-restore BACKUP_FILE=archivo.bak
+```
+
+### **Monitoreo**
+
+```bash
+# Verificar salud de la API
+make api-health
+
+# Abrir Swagger
+make api-swagger
+
+# Abrir Seq
+make logs-view
+```
 
 ## 📁 Estructura del Proyecto
 
 ```
-PlantillaMicroServicio/
-├── PlantillaMicroServicio/              # API Layer (Controllers, Middleware)
-├── PlantillaMicroServicio.Aplication/   # Application Layer (Use Cases, Services)
-├── PlantillaMicroServicio.Dal/          # Data Access Layer (Repositories, Context)
-├── PlantillaMicroServicio.Models/       # Domain Models
-├── PlantillaMicroServicio.Infrastructure/ # Infrastructure Layer (JWT, Config)
-└── .template.config/                    # Template Configuration
+Plantilla-Micro-Servicio/
+├── 📁 [TuProyecto]/                 # API Principal
+├── 📁 [TuProyecto].Aplication/      # Lógica de Aplicación
+├── 📁 [TuProyecto].Dal/             # Acceso a Datos
+├── 📁 [TuProyecto].Infrastructure/  # Infraestructura
+├── 📁 [TuProyecto].Models/          # Modelos
+├── 🐳 Dockerfile                    # Imagen Docker
+├── 🐙 docker-compose.yml           # Servicios de desarrollo
+├── 🏭 docker-compose.prod.yml      # Servicios de producción
+├── ⚙️ Makefile                     # Comandos útiles
+├── 🔧 init-project.sh              # Script de inicialización
+├── 📄 env.example                  # Variables de entorno
+└── 📖 README.md                    # Este archivo
 ```
 
-### 🎯 Responsabilidades por Capa
+## 🔧 Configuración
 
-| Capa               | Responsabilidad                            | Tecnologías                           |
-| ------------------ | ------------------------------------------ | ------------------------------------- |
-| **API**            | Controllers, Middleware, Configuración Web | ASP.NET Core, Swagger                 |
-| **Application**    | Casos de Uso, CQRS, Servicios              | MediatR, FluentValidation, AutoMapper |
-| **Infrastructure** | Autenticación, Configuración Externa       | JWT, CORS, Logging                    |
-| **DAL**            | Acceso a Datos, Repositorios               | Entity Framework, SQL                 |
-| **Models**         | Entidades de Dominio                       | POCOs, DTOs                           |
+### **Sistema de Variables de Entorno Profesional**
 
-## 🚀 Instalación
+El template implementa un **sistema enterprise-grade** de variables de entorno que permite:
 
-### Requisitos Previos
+- ✅ **Configuración sin re-despliegue** - Cambia variables sin rebuild
+- ✅ **Validación automática** - Verifica configuración antes del despliegue
+- ✅ **Generación automática** - Scripts que crean configuraciones válidas
+- ✅ **Separación por ambiente** - Development/Staging/Production
+- ✅ **Secrets management** - Manejo seguro de credenciales
 
-- **.NET 8.0 SDK** o superior
-- **Visual Studio 2022**, **VS Code** o **Rider**
-- Conocimientos básicos de Clean Architecture y DDD
-
-### Instalación de la Plantilla
-
-1. **Clonar el repositorio:**
+### **Variables Requeridas**
 
 ```bash
-git clone https://github.com/andymrrr/Plantilla-Micro-Servicio.git
+# Variables CRÍTICAS (deben estar configuradas)
+PROJECT_NAME=MiMicroServicio          # Nombre del proyecto
+JWT_SECRET=TuClaveSecretaMuyLarga     # Al menos 64 caracteres
+DB_PASSWORD=TuContraseñaSegura        # Contraseña de base de datos
 ```
 
-2. **Instalar la plantilla:**
+### **Variables Importantes**
 
 ```bash
-dotnet new -i .
+# Configuración de la aplicación
+ASPNETCORE_ENVIRONMENT=Development
+DATABASE_PROVIDER=sqlserver
+API_PORT=8080
+DB_PORT=1433
+REDIS_PORT=6379
+SEQ_PORT=5341
 ```
 
-3. **Verificar instalación:**
+### **Variables Opcionales**
 
 ```bash
-dotnet new --list
+# Configuración avanzada
+ASPNETCORE_KESTREL_MAX_CONNECTIONS=100
+SERILOG_LEVEL=Information
+CACHE_EXPIRATION_SECONDS=300
+CORS_ORIGINS=http://localhost:3000
+RATE_LIMIT_PER_MINUTE=100
 ```
 
-Deberías ver:
+### **Comandos de Configuración**
 
 ```bash
-micro-servicio  Plantilla Microservicio Profesional  [C#]
+# Configuración rápida (recomendado)
+./quick-setup.sh
+
+# Configuración manual
+make env-setup
+make validate-env
+
+# Validar configuración
+./validate-env.sh
 ```
 
-## 🎯 Crear un Nuevo Proyecto
+### **Entornos Disponibles**
 
-### Opción 1: Comando Simple
+#### **Desarrollo**
 
 ```bash
-dotnet new micro-servicio -n MiServicio
+docker-compose up -d
 ```
 
-### Opción 2: Con Parámetros Personalizados
+#### **Producción**
 
 ```bash
-dotnet new micro-servicio -n MiServicio -CompanyName "MiEmpresa" -UseJWT true -DatabaseProvider postgresql
+docker-compose -f docker-compose.prod.yml up -d
 ```
 
-### Opción 3: Modo Interactivo
+## 🐳 Docker Compose
+
+### **Servicios Incluidos**
+
+| Servicio       | Descripción             | Puerto |
+| -------------- | ----------------------- | ------ |
+| **api**        | Microservicio principal | 8080   |
+| **db**         | SQL Server              | 1433   |
+| **redis**      | Cache                   | 6379   |
+| **seq**        | Logging                 | 5341   |
+| **nginx**      | Load Balancer (prod)    | 80/443 |
+| **prometheus** | Métricas (prod)         | 9090   |
+| **grafana**    | Dashboards (prod)       | 3000   |
+
+### **Volúmenes**
+
+- `db_data`: Datos de SQL Server
+- `redis_data`: Datos de Redis
+- `seq_data`: Logs de Seq
+- `prometheus_data`: Métricas de Prometheus
+- `grafana_data`: Dashboards de Grafana
+
+## 🔒 Seguridad
+
+### **Configuración Automática**
+
+- ✅ Contraseñas generadas automáticamente
+- ✅ Claves JWT seguras
+- ✅ Usuario no-root en contenedores
+- ✅ Health checks implementados
+- ✅ Rate limiting configurado
+
+### **Recomendaciones de Producción**
+
+1. **Cambiar todas las contraseñas** por defecto
+2. **Configurar HTTPS** con certificados válidos
+3. **Usar secrets management** (Docker Secrets, Kubernetes Secrets)
+4. **Configurar firewalls** apropiados
+5. **Implementar backup automático** de bases de datos
+
+## 📊 Monitoreo y Logging
+
+### **Logging Estructurado**
+
+```csharp
+// Ejemplo de logging
+_logger.Information("Usuario {UserId} accedió al sistema", userId);
+```
+
+### **Métricas Disponibles**
+
+- Request/response times
+- Error rates
+- Memory usage
+- CPU usage
+- Database connections
+
+### **Dashboards Predefinidos**
+
+- API Performance
+- Error Tracking
+- System Resources
+- Database Metrics
+
+## 🚀 Despliegue
+
+### **Desarrollo Local**
 
 ```bash
-dotnet new micro-servicio --interactive
+# Inicializar proyecto
+./init-project.sh
+
+# O manualmente
+make init
 ```
 
-## ⚙️ Parámetros de Configuración
-
-| Parámetro          | Tipo   | Descripción                                  | Default         |
-| ------------------ | ------ | -------------------------------------------- | --------------- |
-| `ProjectName`      | string | Nombre del proyecto                          | MiMicroServicio |
-| `CompanyName`      | string | Nombre de la empresa                         | MiEmpresa       |
-| `UseJWT`           | bool   | Incluir autenticación JWT                    | true            |
-| `UseSwagger`       | bool   | Incluir documentación Swagger                | true            |
-| `UseCaching`       | bool   | Incluir sistema de caché                     | true            |
-| `UseLogging`       | bool   | Incluir sistema de logging                   | true            |
-| `DatabaseProvider` | choice | Proveedor de BD (sqlserver/postgresql/mysql) | sqlserver       |
-| `FrameworkVersion` | choice | Versión de .NET (net8.0/net7.0)              | net8.0          |
-
-## 🔐 Autenticación JWT
-
-### Configuración
-
-```json
-{
-  "ConfiguracionJwt": {
-    "Llave": "tu-llave-secreta-muy-larga",
-    "Asunto": "PlantillaMicroServicio",
-    "Audiencia": "PlantillaMicroServicio",
-    "DuracionMinuto": 60,
-    "ClockSkewMinutos": 2,
-    "ValidarIssuer": true,
-    "ValidarAudience": true
-  }
-}
-```
-
-### Endpoints de Autenticación
-
-- `POST /api/auth/login` - Iniciar sesión
-- `POST /api/auth/refresh` - Renovar token
-- `GET /api/auth/validate` - Validar token
-- `GET /api/auth/info` - Información del token
-
-### Credenciales de Prueba
-
-- **Username:** `admin`
-- **Password:** `password`
-
-## 📖 Documentación con Swagger
-
-### Acceso
-
-```
-http://localhost:5000/swagger
-```
-
-### Características
-
-- ✅ **Autenticación JWT** integrada
-- ✅ **Botón Authorize** para tokens
-- ✅ **Documentación automática** de endpoints
-- ✅ **Interfaz interactiva** para pruebas
-- ✅ **Ejemplos de uso** incluidos
-
-## 🛡️ Middleware de Excepciones
-
-### Características
-
-- **Manejo unificado** de todas las excepciones
-- **Logging estructurado** con niveles apropiados
-- **Respuestas consistentes** en formato JSON
-- **Códigos HTTP** apropiados por tipo de error
-- **Headers CORS** automáticos
-- **Seguridad** (oculta detalles en producción)
-
-### Tipos de Excepciones Manejadas
-
-| Excepción                     | HTTP Code | Descripción                |
-| ----------------------------- | --------- | -------------------------- |
-| `ValidationException`         | 400       | Errores de validación      |
-| `ArgumentException`           | 400       | Parámetros inválidos       |
-| `UnauthorizedAccessException` | 401       | Acceso no autorizado       |
-| `KeyNotFoundException`        | 404       | Recurso no encontrado      |
-| `TimeoutException`            | 408       | Tiempo de espera agotado   |
-| **Otros**                     | 500       | Error interno del servidor |
-
-## 🗄️ Configuración de Base de Datos
-
-### SQL Server
-
-```json
-{
-  "ConnectionStrings": {
-    "PlantillaMicroServicio": "Server=localhost;Database=mi_bd;User Id=usuario;Password=clave;TrustServerCertificate=True"
-  }
-}
-```
-
-### PostgreSQL
-
-```json
-{
-  "ConnectionStrings": {
-    "PlantillaMicroServicio": "Host=localhost;Database=mi_bd;Username=usuario;Password=clave"
-  }
-}
-```
-
-## 🚀 Ejecutar el Proyecto
-
-1. **Restaurar paquetes:**
+### **Producción**
 
 ```bash
-dotnet restore
+# Configurar variables de producción
+cp env.example .env
+# Editar .env con valores de producción
+
+# Desplegar
+docker-compose -f docker-compose.prod.yml up -d
 ```
 
-2. **Compilar:**
+### **Escalado**
 
 ```bash
-dotnet build
-```
-
-3. **Ejecutar:**
-
-```bash
-dotnet run
-```
-
-4. **Abrir Swagger:**
-
-```
-http://localhost:5000/swagger
-```
-
-## 🧪 Pruebas
-
-### 1. Probar Autenticación
-
-```bash
-# Login
-curl -X POST "http://localhost:5000/api/auth/login" \
-  -H "Content-Type: application/json" \
-  -d '{"username":"admin","password":"password"}'
-```
-
-### 2. Probar Endpoint Protegido
-
-```bash
-# Validar token
-curl -X GET "http://localhost:5000/api/auth/validate" \
-  -H "Authorization: Bearer TU_TOKEN_AQUI"
-```
-
-### 3. Probar Salud del Sistema
-
-```bash
-# Health check
-curl -X GET "http://localhost:5000/api/salud"
+# Escalar API a 3 réplicas
+make scale REPLICAS=3
 ```
 
 ## 🔧 Personalización
 
-### Agregar Nuevos Endpoints
+### **Agregar Nuevos Servicios**
 
-1. Crear controlador en `PlantillaMicroServicio/Controllers/`
-2. Implementar lógica en `PlantillaMicroServicio.Aplication/Feature/`
-3. Configurar repositorio en `PlantillaMicroServicio.Dal/`
+1. Agregar servicio en `docker-compose.yml`
+2. Configurar variables en `env.example`
+3. Actualizar `Makefile` con comandos útiles
 
-### Configurar Nuevas Validaciones
+### **Cambiar Base de Datos**
 
-1. Crear validadores en `PlantillaMicroServicio.Aplication/Feature/`
-2. Heredar de `AbstractValidator<T>`
-3. Registrar en `Program.cs`
+1. Modificar `DATABASE_PROVIDER` en `.env`
+2. Actualizar connection strings
+3. Cambiar imagen en docker-compose
 
-### Agregar Nuevos Servicios
+### **Agregar Nuevas APIs**
 
-1. Crear interfaz en la capa apropiada
-2. Implementar en la capa correspondiente
-3. Registrar en el contenedor DI
+1. Crear controladores en la capa API
+2. Implementar handlers en Application
+3. Agregar repositorios en Dal
 
-## 📝 Logs
+## 🐛 Troubleshooting
 
-### Configuración
+### **Problemas Comunes**
 
-```json
-{
-  "SerilogConfig": {
-    "Level": "Information",
-    "Path": "logs/log.txt",
-    "Shared": true
-  }
-}
+#### **Puerto ya en uso**
+
+```bash
+# Cambiar puerto en .env
+API_PORT=8081
 ```
 
-### Niveles de Log
+#### **Base de datos no conecta**
 
-- **Information**: Operaciones normales
-- **Warning**: Validaciones y errores esperados
-- **Error**: Errores de aplicación
-- **Fatal**: Errores críticos
+```bash
+# Verificar logs
+make logs-db
 
-## 🤝 Contribuir
+# Reiniciar servicios
+make restart
+```
+
+#### **Contenedor no inicia**
+
+```bash
+# Ver logs detallados
+docker-compose logs api
+
+# Reconstruir imagen
+make rebuild
+```
+
+## 📚 Recursos Adicionales
+
+- [Documentación de .NET 8](https://docs.microsoft.com/en-us/dotnet/)
+- [Docker Documentation](https://docs.docker.com/)
+- [Serilog Documentation](https://serilog.net/)
+- [Seq Documentation](https://datalust.co/docs/)
+
+## 🤝 Contribución
 
 1. Fork el proyecto
 2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
@@ -325,18 +391,14 @@ curl -X GET "http://localhost:5000/api/salud"
 
 Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
 
-## 👨‍💻 Autor
-
-**Andy Miguel Reyes R.**
-
-- GitHub: [@andymrrr](https://github.com/andymrrr)
-
-## 🙏 Agradecimientos
-
-- Clean Architecture por Uncle Bob
-- Domain-Driven Design por Eric Evans
-- .NET Community por las herramientas y librerías
-
 ---
 
-⭐ **Si te gusta esta plantilla, dale una estrella al repositorio!**
+## 🎯 Próximos Pasos
+
+1. **Ejecuta el script de inicialización**: `./init-project.sh`
+2. **Personaliza la configuración** según tus necesidades
+3. **Desarrolla tu lógica de negocio** en las capas correspondientes
+4. **Configura monitoreo** para producción
+5. **Despliega en tu infraestructura** preferida
+
+¡Tu microservicio está listo para despegar! 🚀

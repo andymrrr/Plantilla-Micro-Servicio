@@ -1,0 +1,228 @@
+# ========================================
+# DOCKER IGNORE PARA MICROSERVICIO
+# ========================================
+# Archivos y directorios que se excluyen del contexto de Docker
+
+# ========================================
+# ARCHIVOS DE DESARROLLO
+# ========================================
+**/.vs/
+**/.vscode/
+**/.idea/
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+
+# ========================================
+# ARCHIVOS DE BUILD
+# ========================================
+**/bin/
+**/obj/
+**/out/
+**/publish/
+**/dist/
+**/build/
+**/target/
+
+# ========================================
+# ARCHIVOS DE PAQUETES
+# ========================================
+**/packages/
+**/node_modules/
+**/vendor/
+**/.nuget/
+
+# ========================================
+# ARCHIVOS DE CONFIGURACIÓN LOCAL
+# ========================================
+**/.env
+**/appsettings.Development.json
+**/appsettings.Local.json
+**/appsettings.*.json
+!**/appsettings.json
+!**/appsettings.Production.json
+
+# ========================================
+# ARCHIVOS DE LOGS
+# ========================================
+**/logs/
+**/*.log
+**/Logs/
+**/log/
+
+# ========================================
+# ARCHIVOS TEMPORALES
+# ========================================
+**/temp/
+**/tmp/
+**/.tmp/
+**/*.tmp
+**/*.temp
+
+# ========================================
+# ARCHIVOS DE CONTROL DE VERSIÓN
+# ========================================
+**/.git/
+**/.gitignore
+**/.gitattributes
+**/.svn/
+**/.hg/
+
+# ========================================
+# ARCHIVOS DE DOCUMENTACIÓN
+# ========================================
+**/README.md
+**/README.txt
+**/docs/
+**/documentation/
+**/*.md
+**/*.txt
+
+# ========================================
+# ARCHIVOS DE TESTING
+# ========================================
+**/TestResults/
+**/testresults/
+**/coverage/
+**/Coverage/
+**/*.coverage
+**/*.coveragexml
+
+# ========================================
+# ARCHIVOS DE DOCKER
+# ========================================
+**/Dockerfile*
+**/docker-compose*.yml
+**/.dockerignore
+**/docker/
+
+# ========================================
+# ARCHIVOS DE CI/CD
+# ========================================
+**/.github/
+**/.gitlab-ci.yml
+**/.azure-pipelines.yml
+**/Jenkinsfile
+**/.travis.yml
+**/.circleci/
+
+# ========================================
+# ARCHIVOS DE MONITOREO
+# ========================================
+**/monitoring/
+**/grafana/
+**/prometheus/
+**/nginx/
+
+# ========================================
+# ARCHIVOS DE SCRIPTS
+# ========================================
+**/scripts/
+**/*.sh
+**/*.bat
+**/*.ps1
+**/Makefile
+
+# ========================================
+# ARCHIVOS DE DATOS
+# ========================================
+**/data/
+**/Data/
+**/databases/
+**/backup/
+**/*.bak
+**/*.mdf
+**/*.ldf
+
+# ========================================
+# ARCHIVOS DE CERTIFICADOS
+# ========================================
+**/ssl/
+**/certificates/
+**/*.pfx
+**/*.pem
+**/*.key
+**/*.crt
+
+# ========================================
+# ARCHIVOS DE CACHÉ
+# ========================================
+**/.cache/
+**/cache/
+**/Cache/
+**/*.cache
+
+# ========================================
+# ARCHIVOS DE BACKUP
+# ========================================
+**/backup/
+**/Backup/
+**/*.backup
+**/*.bak
+
+# ========================================
+# ARCHIVOS DE CONFIGURACIÓN ESPECÍFICA
+# ========================================
+**/env.example
+**/.env.local
+**/.env.development
+**/.env.test
+**/.env.staging
+
+# ========================================
+# ARCHIVOS DE DESARROLLO ESPECÍFICOS
+# ========================================
+**/Thumbs.db
+**/ehthumbs.db
+**/Desktop.ini
+**/$RECYCLE.BIN/
+**/*.lnk
+
+# ========================================
+# ARCHIVOS DE COMPRESIÓN
+# ========================================
+**/*.zip
+**/*.rar
+**/*.7z
+**/*.tar
+**/*.gz
+**/*.bz2
+
+# ========================================
+# ARCHIVOS DE MEDIA
+# ========================================
+**/*.mp4
+**/*.avi
+**/*.mov
+**/*.wmv
+**/*.flv
+**/*.mp3
+**/*.wav
+**/*.wma
+**/*.jpg
+**/*.jpeg
+**/*.png
+**/*.gif
+**/*.bmp
+**/*.tiff
+**/*.ico
+**/*.svg
+
+# ========================================
+# ARCHIVOS DE OFICINA
+# ========================================
+**/*.doc
+**/*.docx
+**/*.xls
+**/*.xlsx
+**/*.ppt
+**/*.pptx
+**/*.pdf
+
+# ========================================
+# ARCHIVOS DE PROYECTO ESPECÍFICOS
+# ========================================
+**/PlantillaMicroServicio.http
+**/*.http
+**/*.rest 
