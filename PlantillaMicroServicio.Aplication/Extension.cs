@@ -5,8 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PlantillaMicroServicio.Aplication.Mapeo;
 using PlantillaMicroServicio.Aplication.Middleware;
-using PlantillaMicroServicio.Aplication.Servicios.Implementacion;
-using PlantillaMicroServicio.Aplication.Servicios.Interfaz;
+using PlantillaMicroServicio.Aplication.Servicios.Cache;
 using System.Reflection;
 
 namespace PlantillaMicroServicio.Aplication

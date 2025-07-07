@@ -1,7 +1,6 @@
 using FluentValidation;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using ServicioJobs.Aplication.Model;
+using PlantillaMicroServicio.Models.Api;
+using PlantillaMicroServicio.Infrastructure.Logging;
 using System.Net;
 using System.Text.Json;
 
@@ -10,14 +9,14 @@ namespace PlantillaMicroServicio.Middleware
     public class ExceptionHandlingMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+        private readonly ILoggerService _loggerService;
         private readonly JsonSerializerOptions _jsonOptions;
         private readonly bool _isDevelopment;
 
-        public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger, IWebHostEnvironment environment)
+        public ExceptionHandlingMiddleware(RequestDelegate next, ILoggerService loggerService, IWebHostEnvironment environment)
         {
             _next = next;
-            _logger = logger;
+            _loggerService = loggerService;
             _isDevelopment = environment.IsDevelopment();
             _jsonOptions = new JsonSerializerOptions
             {
@@ -99,24 +98,32 @@ namespace PlantillaMicroServicio.Middleware
 
         private void LogException(Exception exception, HttpContext context, LogLevel logLevel)
         {
-            var logMessage = "Error en {Method} {Path}: {Message}";
-            var logParams = new object[] { context.Request.Method, context.Request.Path, exception.Message };
-
-            switch (logLevel)
+            var contextInfo = new
             {
-                case LogLevel.Information:
-                    _logger.LogInformation(exception, logMessage, logParams);
-                    break;
-                case LogLevel.Warning:
-                    _logger.LogWarning(exception, logMessage, logParams);
-                    break;
-                case LogLevel.Error:
-                    _logger.LogError(exception, logMessage, logParams);
-                    break;
-                default:
-                    _logger.LogError(exception, logMessage, logParams);
-                    break;
+                Method = context.Request.Method,
+                Path = context.Request.Path,
+                QueryString = context.Request.QueryString.ToString(),
+                User = context.User.Identity?.IsAuthenticated == true
+                    ? context.User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value
+                    : "No autenticado",
+                IP = GetClientIP(context),
+                Timestamp = DateTime.UtcNow
+            };
+
+            // Usar nuestro sistema de logging profesional
+            _loggerService.LogError($"Error en {context.Request.Method} {context.Request.Path}: {exception.Message}",
+                exception, contextInfo);
+        }
+
+        private static string GetClientIP(HttpContext context)
+        {
+            var forwardedHeader = context.Request.Headers["X-Forwarded-For"].FirstOrDefault();
+            if (!string.IsNullOrEmpty(forwardedHeader))
+            {
+                return forwardedHeader.Split(',')[0].Trim();
             }
+
+            return context.Connection.RemoteIpAddress?.ToString() ?? "IP desconocida";
         }
 
         private static void SetCorsHeaders(HttpContext context)

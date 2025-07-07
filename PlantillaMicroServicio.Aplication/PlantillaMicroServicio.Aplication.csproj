@@ -9,10 +9,16 @@
   <ItemGroup>
     <Compile Remove="Feature\Libros\**" />
     <Compile Remove="Paginacion\**" />
+    <Compile Remove="Servicios\Implementacion\**" />
+    <Compile Remove="Servicios\Interfaz\**" />
     <EmbeddedResource Remove="Feature\Libros\**" />
     <EmbeddedResource Remove="Paginacion\**" />
+    <EmbeddedResource Remove="Servicios\Implementacion\**" />
+    <EmbeddedResource Remove="Servicios\Interfaz\**" />
     <None Remove="Feature\Libros\**" />
     <None Remove="Paginacion\**" />
+    <None Remove="Servicios\Implementacion\**" />
+    <None Remove="Servicios\Interfaz\**" />
   </ItemGroup>
 
   <ItemGroup>

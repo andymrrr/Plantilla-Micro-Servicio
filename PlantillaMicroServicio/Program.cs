@@ -4,13 +4,14 @@ using PlantillaMicroServicio.Aplication;
 using PlantillaMicroServicio.Dal;
 using PlantillaMicroServicio.Extensions;
 using PlantillaMicroServicio.Infrastructure.Extensions;
+using PlantillaMicroServicio.Infrastructure.Logging;
 using PlantillaMicroServicio.Middleware;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-ConfiguracionLogger.AgregarLogging(builder);
+// Configurar Serilog
+SerilogConfiguration.ConfigureSerilog(builder.Configuration, builder.Environment.EnvironmentName);
 
 builder.Services.AddControllers(opcion =>
 {
@@ -37,8 +38,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
-app.UseSerilogRequestLogging();
+app.UseRequestLogging();
+app.UseErrorLogging(); // Middleware personalizado para errores importantes
 app.UseExceptionHandling();
 app.MapControllers();
+
+// Configurar Serilog para el cierre de la aplicación
+app.Lifetime.ApplicationStopped.Register(Log.CloseAndFlush);
 
 app.Run();
