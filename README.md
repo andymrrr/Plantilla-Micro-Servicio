@@ -38,7 +38,7 @@ Una plantilla completa y profesional para crear microservicios en .NET 8 con Doc
 
 - **JWT Authentication** configurado
 - **HTTPS** listo para producción
-- **CORS** configurado
+- **CORS configurado profesionalmente** con configuración por ambiente
 - **Rate limiting** integrado
 
 ## 🚀 Inicio Rápido
@@ -198,6 +198,66 @@ CACHE_EXPIRATION_SECONDS=300
 CORS_ORIGINS=http://localhost:3000
 RATE_LIMIT_PER_MINUTE=100
 ```
+
+## 🌐 Configuración de CORS Profesional
+
+El microservicio incluye una **configuración de CORS profesional** que permite especificar exactamente qué orígenes, métodos y headers están permitidos para cada ambiente.
+
+### **Configuración por Ambiente**
+
+#### **Desarrollo (`appsettings.Development.json`)**
+
+```json
+{
+  "ConfiguracionCors": {
+    "OrigenesPermitidos": [
+      "http://localhost:3000",
+      "http://localhost:4200",
+      "http://localhost:8080",
+      "http://localhost:5173"
+    ],
+    "PermitirCredenciales": true,
+    "MetodosPermitidos": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    "HeadersPermitidos": [
+      "Content-Type",
+      "Authorization",
+      "X-Requested-With",
+      "Accept",
+      "Origin"
+    ]
+  }
+}
+```
+
+#### **Producción (`appsettings.Production.json`)**
+
+```json
+{
+  "ConfiguracionCors": {
+    "OrigenesPermitidos": [
+      "https://tu-frontend-produccion.com",
+      "https://www.tu-frontend-produccion.com"
+    ],
+    "PermitirCredenciales": true,
+    "MetodosPermitidos": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    "HeadersPermitidos": ["Content-Type", "Authorization", "X-Requested-With"]
+  }
+}
+```
+
+### **Cómo Configurar para tu Frontend**
+
+1. **Identifica la URL de tu frontend** (ej: `https://mi-app.com`)
+2. **Agrega la URL al array `OrigenesPermitidos`** en el archivo de configuración correspondiente
+3. **Reinicia el microservicio** para aplicar los cambios
+
+### **Ventajas de esta Configuración**
+
+- ✅ **Seguridad mejorada** - Solo orígenes específicos permitidos
+- ✅ **Configuración por ambiente** - Diferentes reglas para dev/prod
+- ✅ **Fácil mantenimiento** - Cambios sin modificar código
+- ✅ **Flexibilidad** - Control granular sobre métodos y headers
+- ✅ **Credenciales seguras** - Soporte para cookies y headers de autorización
 
 ### **Comandos de Configuración**
 

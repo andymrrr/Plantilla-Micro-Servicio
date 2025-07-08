@@ -36,6 +36,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Configurar CORS - debe ir antes de UseAuthorization
+app.UseCors("CorsPolicy");
+
 app.UseAuthorization();
 app.UseRequestLogging();
 app.UseErrorLogging(); // Middleware personalizado para errores importantes

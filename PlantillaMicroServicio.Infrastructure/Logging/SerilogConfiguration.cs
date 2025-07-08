@@ -56,14 +56,14 @@ namespace PlantillaMicroServicio.Infrastructure.Logging
         private static void ConfigureProductionLogging(LoggerConfiguration loggerConfiguration, IConfiguration configuration)
         {
             loggerConfiguration
-                .MinimumLevel.Warning() // Solo warnings y superior en producción
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Error) // Solo errores de Microsoft
-                .MinimumLevel.Override("System", LogEventLevel.Error) // Solo errores de System
-                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Error) // Solo errores de ASP.NET
-                .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Error) // Solo errores de EF
-                .MinimumLevel.Override("Microsoft.AspNetCore.Routing", LogEventLevel.Error) // Solo errores de routing
-                .MinimumLevel.Override("Microsoft.AspNetCore.StaticFiles", LogEventLevel.Error) // Solo errores de archivos estáticos
-                .MinimumLevel.Override("Microsoft.AspNetCore.Hosting", LogEventLevel.Error) // Solo errores de hosting
+                .MinimumLevel.Warning() 
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Error) 
+                .MinimumLevel.Override("System", LogEventLevel.Error) 
+                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Error) 
+                .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Error) 
+                .MinimumLevel.Override("Microsoft.AspNetCore.Routing", LogEventLevel.Error) 
+                .MinimumLevel.Override("Microsoft.AspNetCore.StaticFiles", LogEventLevel.Error) 
+                .MinimumLevel.Override("Microsoft.AspNetCore.Hosting", LogEventLevel.Error)
                 .WriteTo.Console(new JsonFormatter())
                 .WriteTo.File(
                     path: configuration["Serilog:FilePath"] ?? "logs/app-.log",

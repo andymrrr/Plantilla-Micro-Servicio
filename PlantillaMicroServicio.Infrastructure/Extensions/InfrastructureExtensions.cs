@@ -84,11 +84,28 @@ namespace PlantillaMicroServicio.Infrastructure.Extensions
 
         public static void AddCors(this IServiceCollection servicios, IConfiguration configuracion)
         {
+            var corsConfig = configuracion.GetSection("ConfiguracionCors").Get<ConfiguracionCors>();
+
+            if (corsConfig == null)
+            {
+                throw new InvalidOperationException("La configuración CORS no es válida. Verifique 'ConfiguracionCors' en appsettings.json");
+            }
+
+            servicios.Configure<ConfiguracionCors>(configuracion.GetSection("ConfiguracionCors"));
+
             servicios.AddCors(opcion =>
             {
-                opcion.AddPolicy("CorsPolicy", constructor => constructor.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+                opcion.AddPolicy("CorsPolicy", constructor =>
+                {
+                    constructor.WithOrigins(corsConfig.OrigenesPermitidos)
+                               .WithMethods(corsConfig.MetodosPermitidos)
+                               .WithHeaders(corsConfig.HeadersPermitidos);
+
+                    if (corsConfig.PermitirCredenciales)
+                    {
+                        constructor.AllowCredentials();
+                    }
+                });
             });
         }
 
