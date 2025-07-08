@@ -27,27 +27,7 @@ Esta plantilla está diseñada para construir microservicios en .NET siguiendo l
 
 ## 🚀 Instalación Rápida
 
-### **Opción A: Como Template de .NET CLI (Recomendado)**
-
-```bash
-# 1. Clonar el repositorio
-git clone https://github.com/tu-usuario/Plantilla-Micro-Servicio.git
-cd Plantilla-Micro-Servicio
-
-# 2. Registrar la plantilla localmente
-dotnet new -i .
-
-# 3. Verificar que esté instalada
-dotnet new --list
-
-# Deberías ver algo como:
-# micro-servicio  PlantillaMicroservicio   [C#]
-
-# 4. Crear nuevo proyecto
-dotnet new micro-servicio -n NombreDeTuProyecto
-```
-
-### **Opción B: Clonar Directamente**
+### **1. Obtener la Plantilla**
 
 ```bash
 # Clonar el repositorio
@@ -55,22 +35,29 @@ git clone https://github.com/tu-usuario/Plantilla-Micro-Servicio.git
 cd Plantilla-Micro-Servicio
 ```
 
-### **Configuración (Solo para Opción B)**
+### **2. Instalar como Template de .NET CLI**
 
 ```bash
-# Copiar y editar configuración
-cp env.example .env
+# Instalar la plantilla
+dotnet new install .
 
-# Variables importantes a cambiar:
-# PROJECT_NAME=MiNuevoMicroServicio
-# JWT_SECRET=TuClaveSecretaMuyLarga
-# DB_PASSWORD=TuContraseñaSegura
+# Si ya está instalada, reinstalar con force
+dotnet new install . --force
 
-# Dar permisos (Linux/macOS)
-chmod +x init-project.sh
+# Verificar que esté instalada
+dotnet new list
 
-# Ejecutar script automático
-./init-project.sh
+# Deberías ver algo como:
+# micro-servicio  PlantillaMicroservicio   [C#]
+```
+
+### **3. Crear Nuevo Proyecto**
+
+```bash
+# Crear proyecto con la plantilla
+dotnet new micro-servicio -n NombreDeTuProyecto
+
+# Esto creará un directorio con la estructura organizada según Clean Architecture
 ```
 
 ### **Acceder a Servicios**
@@ -133,21 +120,36 @@ chmod +x init-project.sh
 
 ## 🛠️ Comandos Útiles
 
+### **Gestión de Templates**
+
 ```bash
-# Desarrollo
-make dev              # Ejecutar en desarrollo
-make build            # Construir proyecto
-make test             # Ejecutar tests
+# Listar templates instalados
+dotnet new list
 
-# Docker
-make up               # Levantar servicios
-make down             # Detener servicios
-make logs             # Ver logs
-make rebuild          # Reconstruir y levantar
+# Desinstalar template
+dotnet new uninstall PlantillaMicroservicio
 
-# Base de datos
-make db-shell         # Acceder a BD
-make db-backup        # Crear backup
+# Reinstalar template
+dotnet new install . --force
+
+# Ver detalles del template
+dotnet new micro-servicio --help
+```
+
+### **Desarrollo del Proyecto**
+
+```bash
+# Construir proyecto
+dotnet build
+
+# Ejecutar en desarrollo
+dotnet run
+
+# Ejecutar tests
+dotnet test
+
+# Restaurar dependencias
+dotnet restore
 ```
 
 ## 🔧 Configuración por Ambiente
@@ -178,9 +180,9 @@ make db-backup        # Crear backup
 }
 ```
 
-## 🐳 Docker Compose
+## 🐳 Docker (Opcional)
 
-### **Servicios Incluidos**
+### **Servicios Disponibles**
 
 | Servicio  | Descripción             | Puerto |
 | --------- | ----------------------- | ------ |
@@ -192,14 +194,14 @@ make db-backup        # Crear backup
 ### **Comandos Docker**
 
 ```bash
-# Desarrollo
+# Levantar servicios
 docker-compose up -d
-
-# Producción
-docker-compose -f docker-compose.prod.yml up -d
 
 # Ver logs
 docker-compose logs api
+
+# Detener servicios
+docker-compose down
 ```
 
 ## 🚀 Despliegue
@@ -207,18 +209,22 @@ docker-compose logs api
 ### **Desarrollo Local**
 
 ```bash
-./init-project.sh
+# Ejecutar el proyecto
+dotnet run
+
+# O con Docker (opcional)
+docker-compose up -d
 ```
 
 ### **Producción**
 
 ```bash
-# Configurar variables de producción
-cp env.example .env
-# Editar .env con valores de producción
+# Publicar la aplicación
+dotnet publish -c Release
 
-# Desplegar
-docker-compose -f docker-compose.prod.yml up -d
+# O con Docker
+docker build -t mi-microservicio .
+docker run -p 8080:8080 mi-microservicio
 ```
 
 ## 🐛 Troubleshooting
@@ -226,17 +232,20 @@ docker-compose -f docker-compose.prod.yml up -d
 ### **Problemas Comunes**
 
 ```bash
+# Template no aparece en la lista
+dotnet new list
+dotnet new install . --force
+
+# Error al crear proyecto
+dotnet new micro-servicio -n MiProyecto --force
+
 # Puerto ocupado
 netstat -ano | findstr :8080  # Windows
 lsof -i :8080                 # macOS/Linux
 
-# Docker no funciona
-docker --version
-docker system prune -f
-
-# Script no ejecuta
-chmod +x init-project.sh
-bash init-project.sh
+# Proyecto no compila
+dotnet restore
+dotnet build
 ```
 
 ## 📚 Recursos
