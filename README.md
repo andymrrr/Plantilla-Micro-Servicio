@@ -1,20 +1,53 @@
 # 🚀 Plantilla Microservicio .NET - Clean Architecture
 
-Plantilla profesional para crear microservicios en .NET 8 siguiendo **Clean Architecture** y **CQRS** con Entity Framework Core.
+Esta plantilla está diseñada para construir microservicios en .NET siguiendo los principios de **Clean Architecture**. La estructura del proyecto promueve la separación de responsabilidades, la mantenibilidad y el escalado, al mismo tiempo que implementa el patrón **CQRS (Command Query Responsibility Segregation)**, utilizando **Entity Framework Core** como ORM para la gestión de datos.
 
 ## ✨ Características Principales
+
+### **Arquitectura Modular y Desacoplada**
 
 - ✅ **Clean Architecture** implementada
 - ✅ **CQRS** con MediatR
 - ✅ **Entity Framework Core** configurado
+- ✅ **Repository Pattern** con Unit of Work
+
+### **Infraestructura Profesional**
+
 - ✅ **Docker profesional** con multi-stage builds
 - ✅ **JWT Authentication** y **CORS** configurado
 - ✅ **Logging estructurado** con Serilog
 - ✅ **Scripts de inicialización** automática
 
+### **Características Técnicas**
+
+- ✅ Compatible con **.NET 8.0** y superior
+- ✅ Basada en principios **SOLID**
+- ✅ Configuración predefinida para evitar carpetas innecesarias
+- ✅ Soporte para **migraciones** de base de datos
+
 ## 🚀 Instalación Rápida
 
-### 1. **Obtener la Plantilla**
+### **Opción A: Como Template de .NET CLI (Recomendado)**
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/tu-usuario/Plantilla-Micro-Servicio.git
+cd Plantilla-Micro-Servicio
+
+# 2. Registrar la plantilla localmente
+dotnet new -i .
+
+# 3. Verificar que esté instalada
+dotnet new --list
+
+# Deberías ver algo como:
+# micro-servicio  PlantillaMicroservicio   [C#]
+
+# 4. Crear nuevo proyecto
+dotnet new micro-servicio -n NombreDeTuProyecto
+```
+
+### **Opción B: Clonar Directamente**
 
 ```bash
 # Clonar el repositorio
@@ -22,7 +55,7 @@ git clone https://github.com/tu-usuario/Plantilla-Micro-Servicio.git
 cd Plantilla-Micro-Servicio
 ```
 
-### 2. **Configurar Variables**
+### **Configuración (Solo para Opción B)**
 
 ```bash
 # Copiar y editar configuración
@@ -32,11 +65,7 @@ cp env.example .env
 # PROJECT_NAME=MiNuevoMicroServicio
 # JWT_SECRET=TuClaveSecretaMuyLarga
 # DB_PASSWORD=TuContraseñaSegura
-```
 
-### 3. **Inicializar Proyecto**
-
-```bash
 # Dar permisos (Linux/macOS)
 chmod +x init-project.sh
 
@@ -44,7 +73,7 @@ chmod +x init-project.sh
 ./init-project.sh
 ```
 
-### 4. **Acceder a Servicios**
+### **Acceder a Servicios**
 
 - 🌐 **API**: http://localhost:8080
 - 📚 **Swagger**: http://localhost:8080/swagger
@@ -52,41 +81,55 @@ chmod +x init-project.sh
 
 ## 📋 Prerrequisitos
 
-- **.NET 8.0 SDK** o superior
-- **Docker Desktop** (versión 20.10+)
-- **Git** (versión 2.30+)
+### **Requisitos Previos**
+
+- **SDK de .NET 8.0** o superior
+- **Herramientas de desarrollo** como Visual Studio, Visual Studio Code, o JetBrains Rider
+- **Familiaridad con Clean Architecture** y patrones CQRS
+- **Entity Framework Core** (incluido en la plantilla)
+- **Docker Desktop** (versión 20.10+) - Opcional para desarrollo local
 
 ## 🏗️ Estructura del Proyecto
 
+### **Arquitectura Modular y Desacoplada**
+
 ```
-📁 [TuProyecto]/                    # API Layer
+📁 [TuProyecto]/                    # 🎯 API Layer (Presentación)
 ├── Controllers/                    # Controladores REST
 ├── Middleware/                     # Middleware personalizado
 └── Program.cs                      # Punto de entrada
 
-📁 [TuProyecto].Aplication/         # Application Layer
+📁 [TuProyecto].Aplication/         # 🧠 Application Layer (Lógica de Negocio)
 ├── Feature/                        # CQRS con MediatR
-│   ├── Consulta/                   # Queries
-│   └── Comando/                    # Commands
+│   ├── Consulta/                   # Queries (Consultas)
+│   └── Comando/                    # Commands (Comandos)
 ├── Servicios/                      # Servicios de aplicación
 └── Mapeo/                          # AutoMapper
 
-📁 [TuProyecto].Dal/                # Data Access Layer
+📁 [TuProyecto].Dal/                # 🗄️ Data Access Layer
 ├── Contexto/                       # DbContext EF Core
 ├── Core/                           # Repository Pattern
 │   ├── Interfaces/                 # IRepository, IUnitOfWork
 │   └── Repositories/               # Implementaciones
 
-📁 [TuProyecto].Infrastructure/     # Infrastructure Layer
+📁 [TuProyecto].Infrastructure/     # 🔧 Infrastructure Layer
 ├── Authentication/                 # JWT
 ├── Logging/                        # Serilog
 └── Extensions/                     # Configuraciones
 
-📁 [TuProyecto].Models/             # Shared Models
+📁 [TuProyecto].Models/             # 📦 Shared Models
 ├── Api/                            # DTOs
 ├── Configuracion/                  # Clases de configuración
 └── Entidades/                      # Entidades
 ```
+
+### **Capas de la Arquitectura**
+
+- **API**: Exposición de endpoints de la API RESTful para interactuar con los clientes
+- **Application (BLL)**: Contiene los Modelos y la lógica de negocio
+- **DAL**: Acceso a datos utilizando Entity Framework
+- **Infrastructure**: Configuraciones externas y servicios de infraestructura
+- **Models**: Modelos compartidos entre capas
 
 ## 🛠️ Comandos Útiles
 
