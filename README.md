@@ -45,21 +45,30 @@ Una plantilla completa y profesional para crear microservicios en .NET 8 con Doc
 
 ### 🎯 **¿Qué es esta Plantilla?**
 
-Esta es una **plantilla profesional** para crear microservicios en .NET 8. Te permite:
+Esta es una **plantilla enterprise-grade** para crear microservicios en .NET 8 siguiendo los principios de **Clean Architecture** y **CQRS**. Es una solución completa y profesional que incluye:
 
-- ✅ **Crear un nuevo microservicio** en minutos
-- ✅ **Configuración automática** de toda la infraestructura
-- ✅ **Arquitectura limpia** ya implementada
-- ✅ **Docker y CI/CD** listos para producción
-- ✅ **Monitoreo y logging** configurado
+- ✅ **Clean Architecture** implementada con separación clara de capas
+- ✅ **CQRS (Command Query Responsibility Segregation)** con MediatR
+- ✅ **Entity Framework Core** configurado para acceso a datos
+- ✅ **Docker profesional** con multi-stage builds y optimización
+- ✅ **Logging estructurado** con Serilog y Seq
+- ✅ **JWT Authentication** configurado y listo
+- ✅ **CORS configurado profesionalmente** por ambiente
+- ✅ **Scripts de inicialización automática** con renombrado inteligente
+- ✅ **Configuración por ambiente** (Development/Production)
+- ✅ **Health checks** y monitoreo integrado
+- ✅ **Rate limiting** y seguridad avanzada
 
 ### 📋 **Prerrequisitos**
 
 Antes de comenzar, asegúrate de tener instalado:
 
+- ✅ **.NET 8.0 SDK** o superior
 - ✅ **Docker Desktop** (versión 20.10 o superior)
 - ✅ **Git** (versión 2.30 o superior)
 - ✅ **Make** (opcional, para usar comandos abreviados)
+- ✅ **Familiaridad con Clean Architecture y CQRS**
+- ✅ **Entity Framework Core** (incluido en la plantilla)
 
 #### **Instalar Docker Desktop**
 
@@ -102,6 +111,37 @@ sudo usermod -aG docker $USER
 # Iniciar Docker
 sudo systemctl start docker
 sudo systemctl enable docker
+```
+
+#### **Instalar .NET 8.0 SDK**
+
+**Windows:**
+
+```bash
+# Descargar desde: https://dotnet.microsoft.com/download/dotnet/8.0
+# Ejecutar el instalador
+```
+
+**macOS:**
+
+```bash
+# Con Homebrew
+brew install dotnet
+
+# O descargar desde: https://dotnet.microsoft.com/download/dotnet/8.0
+```
+
+**Linux (Ubuntu/Debian):**
+
+```bash
+# Agregar repositorio de Microsoft
+wget https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+
+# Instalar SDK
+sudo apt update
+sudo apt install dotnet-sdk-8.0
 ```
 
 #### **Instalar Git**
@@ -442,25 +482,131 @@ make api-swagger
 make logs-view
 ```
 
-## 📁 Estructura del Proyecto
+## 🏗️ Arquitectura y Estructura
+
+### **Clean Architecture Implementada**
+
+Esta plantilla sigue los principios de **Clean Architecture** con una separación clara de responsabilidades:
 
 ```
-Plantilla-Micro-Servicio/
-├── 📁 [TuProyecto]/                 # API Principal
-├── 📁 [TuProyecto].Aplication/      # Lógica de Aplicación
-├── 📁 [TuProyecto].Dal/             # Acceso a Datos
-├── 📁 [TuProyecto].Infrastructure/  # Infraestructura
-├── 📁 [TuProyecto].Models/          # Modelos
-├── 🐳 Dockerfile                    # Imagen Docker
-├── 🐙 docker-compose.yml           # Servicios de desarrollo
-├── 🏭 docker-compose.prod.yml      # Servicios de producción
-├── ⚙️ Makefile                     # Comandos útiles
-├── 🔧 init-project.sh              # Script de inicialización
-├── 📄 env.example                  # Variables de entorno
-└── 📖 README.md                    # Este archivo
+📁 [TuProyecto]/                    # 🎯 API Layer (Presentación)
+├── Controllers/                    # Controladores REST
+├── Middleware/                     # Middleware personalizado
+├── Extensions/                     # Extensiones de configuración
+└── Program.cs                      # Punto de entrada
+
+📁 [TuProyecto].Aplication/         # 🧠 Application Layer (Lógica de Aplicación)
+├── Feature/                        # Patrón CQRS con MediatR
+│   ├── Consulta/                   # Queries (Consultas)
+│   └── Comando/                    # Commands (Comandos)
+├── Servicios/                      # Servicios de aplicación
+├── Mapeo/                          # AutoMapper profiles
+└── Middleware/                     # Middleware de aplicación
+
+📁 [TuProyecto].Dal/                # 🗄️ Data Access Layer
+├── Contexto/                       # DbContext de Entity Framework
+├── Core/                           # Interfaces y abstracciones
+│   ├── Interfaces/                 # IRepository, IUnitOfWork
+│   └── Repositories/               # Implementaciones
+└── Extension.cs                    # Configuración de DAL
+
+📁 [TuProyecto].Infrastructure/     # 🔧 Infrastructure Layer
+├── Authentication/                 # JWT Authentication
+├── Logging/                        # Serilog configuration
+├── Configuration/                  # Configuraciones externas
+└── Extensions/                     # Extensiones de infraestructura
+
+📁 [TuProyecto].Models/             # 📦 Shared Models
+├── Api/                            # DTOs y modelos de API
+├── Configuracion/                  # Clases de configuración
+└── Entidades/                      # Entidades de dominio
+```
+
+### **Patrón CQRS Implementado**
+
+La plantilla utiliza **CQRS (Command Query Responsibility Segregation)** con MediatR:
+
+```csharp
+// Ejemplo de Query
+public class VerificarEstadoConsulta : IRequest<ControlSalud>
+{
+    public string Servicio { get; set; }
+}
+
+public class VerificarEstadoHandler : IRequestHandler<VerificarEstadoConsulta, ControlSalud>
+{
+    public async Task<ControlSalud> Handle(VerificarEstadoConsulta request, CancellationToken cancellationToken)
+    {
+        // Lógica de consulta
+    }
+}
+
+// Ejemplo de Command
+public class CrearUsuarioComando : IRequest<int>
+{
+    public string Nombre { get; set; }
+    public string Email { get; set; }
+}
+```
+
+### **Entity Framework Core**
+
+Configurado con **Repository Pattern** y **Unit of Work**:
+
+```csharp
+// Interfaz del repositorio
+public interface IRepositorio<T> where T : class
+{
+    Task<T> ObtenerPorIdAsync(int id);
+    Task<IEnumerable<T>> ObtenerTodosAsync();
+    Task AgregarAsync(T entidad);
+    Task ActualizarAsync(T entidad);
+    Task EliminarAsync(T entidad);
+}
+
+// Unit of Work
+public interface IPlantillaMicroServicioUoW
+{
+    IRepositorio<T> Repositorio<T>() where T : class;
+    Task<int> GuardarCambiosAsync();
+}
 ```
 
 ## 🔧 Configuración
+
+### **Características Técnicas Avanzadas**
+
+#### **Docker Profesional**
+
+- **Multi-stage builds** para optimización de imágenes
+- **Usuario no-root** para seguridad
+- **Health checks** integrados
+- **Variables dinámicas** para configuración automática
+- **Optimización de capas** para builds más rápidos
+
+#### **Logging y Monitoreo**
+
+- **Serilog** con logging estructurado
+- **Seq** para visualización de logs
+- **Request/Response logging** automático
+- **Error tracking** con contexto completo
+- **Performance monitoring** integrado
+
+#### **Seguridad Enterprise**
+
+- **JWT Authentication** configurado
+- **CORS profesional** por ambiente
+- **Rate limiting** integrado
+- **HTTPS** listo para producción
+- **Secrets management** con Docker
+
+#### **Base de Datos**
+
+- **Entity Framework Core** configurado
+- **Repository Pattern** implementado
+- **Unit of Work** pattern
+- **Migrations** automáticas
+- **Connection pooling** optimizado
 
 ### **Sistema de Variables de Entorno Profesional**
 
