@@ -43,16 +43,144 @@ Una plantilla completa y profesional para crear microservicios en .NET 8 con Doc
 
 ## 🚀 Inicio Rápido
 
+### 📋 **Prerrequisitos**
+
+Antes de comenzar, asegúrate de tener instalado:
+
+- ✅ **Docker Desktop** (versión 20.10 o superior)
+- ✅ **Git** (versión 2.30 o superior)
+- ✅ **Make** (opcional, para usar comandos abreviados)
+
+#### **Instalar Docker Desktop**
+
+**Windows:**
+
+```bash
+# Descargar desde: https://www.docker.com/products/docker-desktop
+# Ejecutar el instalador y seguir las instrucciones
+```
+
+**macOS:**
+
+```bash
+# Descargar desde: https://www.docker.com/products/docker-desktop
+# Arrastrar Docker.app a Applications
+```
+
+**Linux (Ubuntu/Debian):**
+
+```bash
+# Actualizar repositorios
+sudo apt update
+
+# Instalar dependencias
+sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release
+
+# Agregar clave GPG de Docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+# Agregar repositorio de Docker
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Instalar Docker
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io
+
+# Agregar usuario al grupo docker
+sudo usermod -aG docker $USER
+
+# Iniciar Docker
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+
+#### **Instalar Git**
+
+**Windows:**
+
+```bash
+# Descargar desde: https://git-scm.com/download/win
+# Ejecutar el instalador
+```
+
+**macOS:**
+
+```bash
+# Con Homebrew
+brew install git
+
+# O descargar desde: https://git-scm.com/download/mac
+```
+
+**Linux:**
+
+```bash
+# Ubuntu/Debian
+sudo apt update && sudo apt install git
+
+# CentOS/RHEL
+sudo yum install git
+```
+
+#### **Instalar Make (Opcional)**
+
+**Windows:**
+
+```bash
+# Con Chocolatey
+choco install make
+
+# Con Scoop
+scoop install make
+```
+
+**macOS:**
+
+```bash
+# Ya viene instalado por defecto
+```
+
+**Linux:**
+
+```bash
+# Ubuntu/Debian
+sudo apt install make
+
+# CentOS/RHEL
+sudo yum install make
+```
+
 ### 1. **Clonar el Template**
 
 ```bash
+# Clonar el repositorio
 git clone <tu-repositorio>
 cd Plantilla-Micro-Servicio
+
+# O si prefieres descargar como ZIP
+# Descargar desde GitHub y extraer
 ```
 
-### 2. **Ejecutar Script de Inicialización**
+### 2. **Configuración Inicial**
 
 ```bash
+# Copiar archivo de variables de entorno
+cp env.example .env
+
+# Editar configuración (opcional)
+# Puedes usar cualquier editor de texto
+notepad .env  # Windows
+nano .env     # Linux/macOS
+code .env     # VS Code
+```
+
+### 3. **Ejecutar Script de Inicialización**
+
+```bash
+# Dar permisos de ejecución (Linux/macOS)
+chmod +x init-project.sh
+
+# Ejecutar script de inicialización
 ./init-project.sh
 ```
 
@@ -65,7 +193,21 @@ El script te guiará a través de:
 - ✅ Renombrado automático de archivos
 - ✅ Despliegue inicial
 
-### 3. **Acceder a los Servicios**
+### 4. **Verificar Instalación**
+
+```bash
+# Verificar que Docker esté funcionando
+docker --version
+docker-compose --version
+
+# Verificar que los servicios estén corriendo
+docker ps
+
+# Ver logs de la aplicación
+docker-compose logs api
+```
+
+### 5. **Acceder a los Servicios**
 
 Una vez completado, tendrás acceso a:
 
@@ -73,6 +215,36 @@ Una vez completado, tendrás acceso a:
 - 📚 **Swagger**: http://localhost:8080/swagger
 - 📊 **Seq (Logs)**: http://localhost:5341
 - 🗄️ **Base de Datos**: localhost:1433
+
+### ⚡ **Instalación Rápida (Para Expertos)**
+
+Si ya tienes Docker instalado y conoces el proceso:
+
+```bash
+# Clonar y configurar en un comando
+git clone <tu-repositorio> && cd Plantilla-Micro-Servicio && cp env.example .env && ./init-project.sh
+```
+
+### 🔧 **Instalación Manual (Sin Script)**
+
+Si prefieres hacerlo paso a paso:
+
+```bash
+# 1. Clonar repositorio
+git clone <tu-repositorio>
+cd Plantilla-Micro-Servicio
+
+# 2. Configurar variables de entorno
+cp env.example .env
+# Editar .env con tus preferencias
+
+# 3. Levantar servicios
+docker-compose up -d
+
+# 4. Verificar que todo funcione
+docker-compose ps
+curl http://localhost:8080/health
+```
 
 ## 🛠️ Comandos Útiles
 
@@ -403,13 +575,43 @@ make scale REPLICAS=3
 
 ## 🐛 Troubleshooting
 
-### **Problemas Comunes**
+### **Problemas de Instalación**
+
+#### **Docker no está instalado o no funciona**
+
+```bash
+# Verificar instalación
+docker --version
+
+# Si no está instalado, seguir instrucciones de instalación arriba
+# Si está instalado pero no funciona:
+
+# Windows: Reiniciar Docker Desktop
+# macOS: Reiniciar Docker Desktop
+# Linux: sudo systemctl restart docker
+```
 
 #### **Puerto ya en uso**
 
 ```bash
+# Ver qué está usando el puerto
+netstat -ano | findstr :8080  # Windows
+lsof -i :8080                 # macOS/Linux
+
 # Cambiar puerto en .env
 API_PORT=8081
+```
+
+#### **Permisos de archivo (Linux/macOS)**
+
+```bash
+# Dar permisos de ejecución
+chmod +x init-project.sh
+chmod +x *.sh
+
+# Si hay problemas con Docker
+sudo usermod -aG docker $USER
+# Reiniciar sesión después
 ```
 
 #### **Base de datos no conecta**
@@ -420,6 +622,9 @@ make logs-db
 
 # Reiniciar servicios
 make restart
+
+# Verificar variables de entorno
+cat .env | grep DB_
 ```
 
 #### **Contenedor no inicia**
@@ -430,6 +635,34 @@ docker-compose logs api
 
 # Reconstruir imagen
 make rebuild
+
+# Limpiar contenedores y volúmenes
+docker-compose down -v
+docker system prune -f
+```
+
+#### **Script de inicialización falla**
+
+```bash
+# Verificar que el archivo existe
+ls -la init-project.sh
+
+# Ejecutar con bash explícitamente
+bash init-project.sh
+
+# Verificar permisos
+chmod +x init-project.sh
+```
+
+#### **Problemas de red**
+
+```bash
+# Verificar que Docker tenga acceso a internet
+docker run hello-world
+
+# Si hay proxy corporativo, configurar Docker
+# Windows/macOS: Docker Desktop > Settings > Resources > Proxies
+# Linux: /etc/systemd/system/docker.service.d/http-proxy.conf
 ```
 
 ## 📚 Recursos Adicionales
