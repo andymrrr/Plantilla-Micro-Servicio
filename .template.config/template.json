@@ -1,114 +1,15 @@
 {
-  "$schema": "https://json.schemastore.org/template",
+  "$schema": "http://json.schemastore.org/template",
   "author": "Andy Miguel Reyes R.",
-  "classifications": [
-    "web",
-    "api",
-    "aspnet",
-    "microservice",
-    "clean-architecture",
-    "ddd",
-    "jwt",
-    "swagger"
-  ],
+  "classifications": ["WebApi", "CleanArchitecture", "Microservice"],
   "identity": "Plantilla.Microservicio.Template",
-  "name": "Plantilla Microservicio Profesional",
+  "name": "Template Microservicio Clean Architecture",
   "shortName": "micro-servicio",
+  "sourceName": "PlantillaMicroServicio",
+  "preferNameDirectory": false,
   "tags": {
     "language": "C#",
-    "type": "project",
-    "framework": "aspnet",
-    "architecture": "clean-architecture",
-    "pattern": "ddd",
-    "security": "jwt",
-    "documentation": "swagger"
-  },
-  "sourceName": "PlantillaMicroServicio",
-  "description": "Plantilla profesional para microservicios con Clean Architecture, JWT, Swagger, y patrones DDD",
-  "preferNameDirectory": true,
-  "guids": [
-    "9DC5C0BF-CB17-4CCE-8473-DFA2AF6DA8F8",
-    "D02AC221-CB7D-4A42-B459-D565051DAE8E",
-    "99AD3020-C9B5-4F7B-80C4-CDA2781D3D73",
-    "B12D6E22-AE10-41C6-9A41-E053846AE912",
-    "5E104D57-8E82-4D4D-84D4-7F25D4D10514",
-    "A1B2C3D4-E5F6-7890-ABCD-EF1234567890"
-  ],
-  "symbols": {
-    "ProjectName": {
-      "type": "parameter",
-      "datatype": "string",
-      "replaces": "PlantillaMicroServicio",
-      "description": "Nombre del proyecto microservicio",
-      "defaultValue": "MiMicroServicio"
-    },
-    "CompanyName": {
-      "type": "parameter",
-      "datatype": "string",
-      "replaces": "PlantillaMicroServicio",
-      "description": "Nombre de la empresa o organización",
-      "defaultValue": "MiEmpresa"
-    },
-    "UseJWT": {
-      "type": "parameter",
-      "datatype": "bool",
-      "description": "Incluir autenticación JWT",
-      "defaultValue": "true"
-    },
-    "UseSwagger": {
-      "type": "parameter",
-      "datatype": "bool",
-      "description": "Incluir documentación Swagger",
-      "defaultValue": "true"
-    },
-    "UseCaching": {
-      "type": "parameter",
-      "datatype": "bool",
-      "description": "Incluir sistema de caché",
-      "defaultValue": "true"
-    },
-    "UseLogging": {
-      "type": "parameter",
-      "datatype": "bool",
-      "description": "Incluir sistema de logging",
-      "defaultValue": "true"
-    },
-    "DatabaseProvider": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "sqlserver",
-          "description": "SQL Server"
-        },
-        {
-          "choice": "postgresql",
-          "description": "PostgreSQL"
-        },
-        {
-          "choice": "mysql",
-          "description": "MySQL"
-        }
-      ],
-      "description": "Proveedor de base de datos",
-      "defaultValue": "sqlserver"
-    },
-    "FrameworkVersion": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "net8.0",
-          "description": ".NET 8.0"
-        },
-        {
-          "choice": "net7.0",
-          "description": ".NET 7.0"
-        }
-      ],
-      "description": "Versión de .NET",
-      "defaultValue": "net8.0"
-    }
+    "type": "solution"
   },
   "sources": [
     {
@@ -119,46 +20,10 @@
             "**/bin/**",
             "**/obj/**",
             "**/.vs/**",
-            "**/node_modules/**",
-            "**/*.user",
-            "**/*.suo",
-            "**/*.cache",
-            "**/*.log",
-            "**/logs/**",
             "**/.template.config/**"
           ]
         }
       ]
-    }
-  ],
-  "postActions": [
-    {
-      "description": "Restaurar paquetes NuGet",
-      "manualInstructions": [
-        {
-          "text": "Ejecutar 'dotnet restore' para restaurar los paquetes NuGet"
-        }
-      ],
-      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
-      "continueOnError": true
-    },
-    {
-      "description": "Compilar el proyecto",
-      "manualInstructions": [
-        {
-          "text": "Ejecutar 'dotnet build' para compilar el proyecto"
-        }
-      ],
-      "actionId": "D0B82913-690E-4E00-96BE-640FDFD78F2E",
-      "continueOnError": true
-    }
-  ],
-  "primaryOutputs": [
-    {
-      "path": "PlantillaMicroServicio/PlantillaMicroServicio.csproj"
-    },
-    {
-      "path": "PlantillaMicroServicio.sln"
     }
   ]
 }
